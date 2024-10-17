@@ -1,15 +1,14 @@
-﻿using Azure.Identity;
-using ApiaryManagementSystem.Application.Common.Interfaces;
+﻿using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Infrastructure.Data;
 using ApiaryManagementSystem.Web.Services;
+using Azure.Identity;
 using Microsoft.AspNetCore.Mvc;
-
 using NSwag;
 using NSwag.Generation.Processors.Security;
 
 namespace ApiaryManagementSystem.Web;
 
-public static class DependencyInjection
+public static class WebConfiguration
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
@@ -23,8 +22,6 @@ public static class DependencyInjection
             .AddDbContextCheck<ApplicationDbContext>();
 
         services.AddExceptionHandler<CustomExceptionHandler>();
-
-        services.AddRazorPages();
 
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>
