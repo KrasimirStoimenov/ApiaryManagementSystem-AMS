@@ -29,6 +29,7 @@
   <!-- Auto-generated Open API specification and Angular TypeScript clients -->
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <UserSecretsId>d7c33880-521e-4415-b075-78fcd2051da4</UserSecretsId>
   </PropertyGroup>
 
   <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)' == 'Debug' And '$(SkipNSwag)' != 'True' ">
