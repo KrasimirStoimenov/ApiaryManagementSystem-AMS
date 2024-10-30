@@ -3,6 +3,7 @@
 using ApiaryManagementSystem.Domain.Constants;
 using ApiaryManagementSystem.Domain.Entities;
 using ApiaryManagementSystem.Infrastructure.Identity;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -52,9 +53,14 @@ public class ApplicationDbContextInitialiser(
         }
 
         // Default users
-        var username = configuration["Administrator:Username"];
         var email = configuration["Administrator:Email"];
+        var username = configuration["Administrator:Username"];
         var password = configuration["Administrator:Password"];
+
+        Guard.Against.NullOrEmpty(email, message: "Administrator 'Email' not found.");
+        Guard.Against.NullOrEmpty(username, message: "Administrator 'Username' not found.");
+        Guard.Against.NullOrEmpty(password, message: "Administrator 'Password' not found.");
+
 
         var administrator = new ApplicationUser
         {
