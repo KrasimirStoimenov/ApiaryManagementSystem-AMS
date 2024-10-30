@@ -4,8 +4,8 @@ using ApiaryManagementSystem.Domain.Models.Apiaries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using static ApiaryManagementSystem.Domain.Models.ModelConstants.Apiary;
-using static ApiaryManagementSystem.Domain.Models.ModelConstants.Common;
+using static ApiaryManagementSystem.Domain.Constants.Models.Apiary;
+using static ApiaryManagementSystem.Domain.Constants.Models.Common;
 
 internal sealed class ApiaryConfiguration : IEntityTypeConfiguration<Apiary>
 {

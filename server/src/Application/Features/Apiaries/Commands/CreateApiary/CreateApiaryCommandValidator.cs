@@ -1,7 +1,7 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Apiaries.Commands.CreateApiary;
 
-using static ApiaryManagementSystem.Domain.Models.ModelConstants.Apiary;
-using static ApiaryManagementSystem.Domain.Models.ModelConstants.Common;
+using static ApiaryManagementSystem.Domain.Constants.Models.Apiary;
+using static ApiaryManagementSystem.Domain.Constants.Models.Common;
 
 public class CreateApiaryCommandValidator : AbstractValidator<CreateApiaryCommand>
 {

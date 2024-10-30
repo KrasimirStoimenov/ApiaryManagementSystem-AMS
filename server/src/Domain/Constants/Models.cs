@@ -1,6 +1,6 @@
-﻿namespace ApiaryManagementSystem.Domain.Models;
+﻿namespace ApiaryManagementSystem.Domain.Constants;
 
-public sealed class ModelConstants
+public sealed class Models
 {
     public class Common
     {
