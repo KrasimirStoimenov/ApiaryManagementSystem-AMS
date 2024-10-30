@@ -1,15 +1,17 @@
-﻿using ApiaryManagementSystem.Application.Common.Interfaces;
+﻿namespace ApiaryManagementSystem.Infrastructure;
+
+using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Domain.Constants;
 using ApiaryManagementSystem.Infrastructure.Data;
 using ApiaryManagementSystem.Infrastructure.Data.Interceptors;
 using ApiaryManagementSystem.Infrastructure.Identity;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ApiaryManagementSystem.Infrastructure;
 
 public static class InfrastructureConfiguration
 {
