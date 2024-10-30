@@ -1,11 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
-using AutoMapper;
 using ApiaryManagementSystem.Application.Common.Interfaces;
-using ApiaryManagementSystem.Application.Common.Models;
-using ApiaryManagementSystem.Application.TodoItems.Queries.GetTodoItemsWithPagination;
-using ApiaryManagementSystem.Application.TodoLists.Queries.GetTodos;
-using ApiaryManagementSystem.Domain.Entities;
+using AutoMapper;
 using NUnit.Framework;
 
 namespace ApiaryManagementSystem.Application.UnitTests.Common.Mappings;
@@ -17,7 +13,7 @@ public class MappingTests
 
     public MappingTests()
     {
-        _configuration = new MapperConfiguration(config => 
+        _configuration = new MapperConfiguration(config =>
             config.AddMaps(Assembly.GetAssembly(typeof(IApplicationDbContext))));
 
         _mapper = _configuration.CreateMapper();
@@ -27,19 +23,6 @@ public class MappingTests
     public void ShouldHaveValidConfiguration()
     {
         _configuration.AssertConfigurationIsValid();
-    }
-
-    [Test]
-    [TestCase(typeof(TodoList), typeof(TodoListDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
-    [TestCase(typeof(TodoList), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
-    public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
-    {
-        var instance = GetInstanceOf(source);
-
-        _mapper.Map(instance, source, destination);
     }
 
     private object GetInstanceOf(Type type)

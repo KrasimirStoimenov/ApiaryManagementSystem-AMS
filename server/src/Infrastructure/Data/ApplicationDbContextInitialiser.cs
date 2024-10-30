@@ -1,7 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Infrastructure.Data;
 
 using ApiaryManagementSystem.Domain.Constants;
-using ApiaryManagementSystem.Domain.Entities;
 using ApiaryManagementSystem.Infrastructure.Identity;
 using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Identity;
@@ -83,21 +82,6 @@ public class ApplicationDbContextInitialiser(
     {
         // Default data
         // Seed, if necessary
-        if (!context.TodoLists.Any())
-        {
-            context.TodoLists.Add(new TodoList
-            {
-                Title = "Todo List",
-                Items =
-                {
-                    new TodoItem { Title = "Make a todo list 📃" },
-                    new TodoItem { Title = "Check off the first item ✅" },
-                    new TodoItem { Title = "Realise you've already done two things on the list! 🤯"},
-                    new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
-                }
-            });
-
-            await context.SaveChangesAsync();
-        }
+        await Task.CompletedTask;
     }
 }
