@@ -1,6 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Apiaries.EventHandlers;
 
-using ApiaryManagementSystem.Domain.Events;
+using ApiaryManagementSystem.Domain.Events.Apiaries;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

@@ -1,7 +1,7 @@
 ﻿using ApiaryManagementSystem.Application.Common.Interfaces;
 namespace ApiaryManagementSystem.Application.Features.Apiaries.Commands.UpdateApiary;
 
-using ApiaryManagementSystem.Domain.Events;
+using ApiaryManagementSystem.Domain.Events.Apiaries;
 using Ardalis.GuardClauses;
 using MediatR;
 

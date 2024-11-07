@@ -84,6 +84,34 @@
             "JWT": []
           }
         ]
+      },
+      "delete": {
+        "tags": [
+          "Apiaries"
+        ],
+        "operationId": "DeleteApiary",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Users/register": {

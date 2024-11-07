@@ -3,7 +3,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
-using ApiaryManagementSystem.Domain.Events;
+using ApiaryManagementSystem.Domain.Events.Apiaries;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
 using MediatR;
 

@@ -1,4 +1,4 @@
-﻿namespace ApiaryManagementSystem.Domain.Events;
+﻿namespace ApiaryManagementSystem.Domain.Events.Apiaries;
 
 using ApiaryManagementSystem.Domain.Common;
 

@@ -4,9 +4,9 @@ using ApiaryManagementSystem.Domain.Events.Apiaries;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-public sealed class ApiaryCreatedEventHandler(ILogger<ApiaryCreatedEventHandler> logger) : INotificationHandler<ApiaryCreatedEvent>
+internal class ApiaryDeletedEventHandler(ILogger<ApiaryCreatedEventHandler> logger) : INotificationHandler<ApiaryDeletedEvent>
 {
-    public Task Handle(ApiaryCreatedEvent notification, CancellationToken cancellationToken)
+    public Task Handle(ApiaryDeletedEvent notification, CancellationToken cancellationToken)
     {
         logger.LogInformation("Domain event fired: {DomainEvent}", notification.GetType().Name);
 
