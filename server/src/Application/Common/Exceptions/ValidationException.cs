@@ -1,6 +1,6 @@
-﻿using FluentValidation.Results;
+﻿namespace ApiaryManagementSystem.Application.Common.Exceptions;
 
-namespace ApiaryManagementSystem.Application.Common.Exceptions;
+using FluentValidation.Results;
 
 public class ValidationException : Exception
 {

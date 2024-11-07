@@ -1,6 +1,9 @@
-﻿using ApiaryManagementSystem.Application.Common.Models;
+﻿namespace ApiaryManagementSystem.Application.Common.Mappings;
 
-namespace ApiaryManagementSystem.Application.Common.Mappings;
+using ApiaryManagementSystem.Application.Common.Models;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 public static class MappingExtensions
 {

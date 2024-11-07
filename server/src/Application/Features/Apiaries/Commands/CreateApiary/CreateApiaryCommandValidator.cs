@@ -1,5 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Apiaries.Commands.CreateApiary;
 
+using FluentValidation;
 using static ApiaryManagementSystem.Domain.Constants.Models.Apiary;
 using static ApiaryManagementSystem.Domain.Constants.Models.Common;
 

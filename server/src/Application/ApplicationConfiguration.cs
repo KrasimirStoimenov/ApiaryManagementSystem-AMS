@@ -1,8 +1,10 @@
-﻿using System.Reflection;
-using ApiaryManagementSystem.Application.Common.Behaviours;
-using Microsoft.Extensions.DependencyInjection;
+﻿namespace ApiaryManagementSystem.Application;
 
-namespace ApiaryManagementSystem.Application;
+using System.Reflection;
+using ApiaryManagementSystem.Application.Common.Behaviours;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 public static class ApplicationConfiguration
 {

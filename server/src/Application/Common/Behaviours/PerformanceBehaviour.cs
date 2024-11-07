@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
-using ApiaryManagementSystem.Application.Common.Interfaces;
-using Microsoft.Extensions.Logging;
+﻿namespace ApiaryManagementSystem.Application.Common.Behaviours;
 
-namespace ApiaryManagementSystem.Application.Common.Behaviours;
+using System.Diagnostics;
+using ApiaryManagementSystem.Application.Common.Interfaces;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

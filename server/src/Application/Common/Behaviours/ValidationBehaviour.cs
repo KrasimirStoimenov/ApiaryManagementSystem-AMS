@@ -1,6 +1,8 @@
-﻿using ValidationException = ApiaryManagementSystem.Application.Common.Exceptions.ValidationException;
+﻿namespace ApiaryManagementSystem.Application.Common.Behaviours;
 
-namespace ApiaryManagementSystem.Application.Common.Behaviours;
+using FluentValidation;
+using MediatR;
+using ValidationException = ApiaryManagementSystem.Application.Common.Exceptions.ValidationException;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : notnull

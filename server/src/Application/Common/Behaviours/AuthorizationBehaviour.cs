@@ -1,9 +1,10 @@
-﻿using System.Reflection;
+﻿namespace ApiaryManagementSystem.Application.Common.Behaviours;
+
+using System.Reflection;
 using ApiaryManagementSystem.Application.Common.Exceptions;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Security;
-
-namespace ApiaryManagementSystem.Application.Common.Behaviours;
+using MediatR;
 
 public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

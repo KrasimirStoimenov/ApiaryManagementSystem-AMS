@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Domain.Events;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
+using MediatR;
 
 public sealed class CreateApiaryCommand : IRequest<Guid>
 {

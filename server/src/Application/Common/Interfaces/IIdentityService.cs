@@ -1,6 +1,6 @@
-﻿using ApiaryManagementSystem.Application.Common.Models;
+﻿namespace ApiaryManagementSystem.Application.Common.Interfaces;
 
-namespace ApiaryManagementSystem.Application.Common.Interfaces;
+using ApiaryManagementSystem.Application.Common.Models;
 
 public interface IIdentityService
 {

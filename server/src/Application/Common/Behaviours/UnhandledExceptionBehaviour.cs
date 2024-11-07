@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿namespace ApiaryManagementSystem.Application.Common.Behaviours;
 
-namespace ApiaryManagementSystem.Application.Common.Behaviours;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

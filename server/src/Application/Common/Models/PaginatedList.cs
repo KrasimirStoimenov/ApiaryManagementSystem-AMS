@@ -1,5 +1,7 @@
 ﻿namespace ApiaryManagementSystem.Application.Common.Models;
 
+using Microsoft.EntityFrameworkCore;
+
 public class PaginatedList<T>
 {
     public IReadOnlyCollection<T> Items { get; }
