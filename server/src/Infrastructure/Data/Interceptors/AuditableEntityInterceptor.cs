@@ -1,10 +1,10 @@
-﻿using ApiaryManagementSystem.Application.Common.Interfaces;
+﻿namespace ApiaryManagementSystem.Infrastructure.Data.Interceptors;
+
+using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-
-namespace ApiaryManagementSystem.Infrastructure.Data.Interceptors;
 
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {

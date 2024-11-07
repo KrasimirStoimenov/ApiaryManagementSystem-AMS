@@ -1,7 +1,7 @@
-﻿using ApiaryManagementSystem.Application.Common.Models;
-using Microsoft.AspNetCore.Identity;
+﻿namespace ApiaryManagementSystem.Infrastructure.Identity;
 
-namespace ApiaryManagementSystem.Infrastructure.Identity;
+using ApiaryManagementSystem.Application.Common.Models;
+using Microsoft.AspNetCore.Identity;
 
 public static class IdentityResultExtensions
 {

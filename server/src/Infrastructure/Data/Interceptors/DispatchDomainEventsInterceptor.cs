@@ -1,9 +1,9 @@
-﻿using ApiaryManagementSystem.Domain.Common;
+﻿namespace ApiaryManagementSystem.Infrastructure.Data.Interceptors;
+
+using ApiaryManagementSystem.Domain.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-
-namespace ApiaryManagementSystem.Infrastructure.Data.Interceptors;
 
 public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 {

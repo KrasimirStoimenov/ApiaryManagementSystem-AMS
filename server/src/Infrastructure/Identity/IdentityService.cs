@@ -1,10 +1,9 @@
+namespace ApiaryManagementSystem.Infrastructure.Identity;
+
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace ApiaryManagementSystem.Infrastructure.Identity;
 
 public class IdentityService : IIdentityService
 {
