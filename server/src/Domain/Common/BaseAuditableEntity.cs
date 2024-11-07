@@ -1,7 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Domain.Common;
 
-public abstract class BaseAuditableEntity<TId> : BaseEntity<TId>
-    where TId : struct
+public abstract class BaseAuditableEntity : BaseEntity
 {
     public DateTimeOffset Created { get; set; }
 

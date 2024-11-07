@@ -27,7 +27,7 @@ public class DispatchDomainEventsInterceptor(IMediator mediator) : SaveChangesIn
         if (context == null) return;
 
         var entities = context.ChangeTracker
-            .Entries<BaseEntity<int>>()
+            .Entries<BaseEntity>()
             .Where(e => e.Entity.DomainEvents.Count != 0)
             .Select(e => e.Entity);
 

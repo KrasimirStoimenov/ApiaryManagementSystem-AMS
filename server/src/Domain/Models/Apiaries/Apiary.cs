@@ -2,7 +2,7 @@
 
 using ApiaryManagementSystem.Domain.Common;
 
-public sealed class Apiary : BaseAuditableEntity<Guid>
+public sealed class Apiary : BaseAuditableEntity
 {
     public Apiary(string name, string location)
     {
