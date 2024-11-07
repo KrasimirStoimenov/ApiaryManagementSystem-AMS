@@ -1,6 +1,7 @@
-﻿using ApiaryManagementSystem.Domain.Models.Apiaries;
+﻿namespace ApiaryManagementSystem.Domain.Events;
 
-namespace ApiaryManagementSystem.Domain.Events;
+using ApiaryManagementSystem.Domain.Common;
+using ApiaryManagementSystem.Domain.Models.Apiaries;
 
 public class ApiaryCreatedEvent : BaseEvent
 {

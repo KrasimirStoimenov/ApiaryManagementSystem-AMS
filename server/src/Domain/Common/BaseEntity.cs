@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace ApiaryManagementSystem.Domain.Common;
 
-namespace ApiaryManagementSystem.Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public abstract class BaseEntity<TId>
         where TId : struct
