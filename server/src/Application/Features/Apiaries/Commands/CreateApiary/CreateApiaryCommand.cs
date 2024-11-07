@@ -13,22 +13,17 @@ public sealed class CreateApiaryCommand : IRequest<Guid>
 
     public required string Location { get; init; }
 
-    internal sealed class CreateApiaryCommandHandler(
-        IApplicationDbContext applicationDbContext) : IRequestHandler<CreateApiaryCommand, Guid>
+    internal sealed class CreateApiaryCommandHandler(IApplicationDbContext dbContext) : IRequestHandler<CreateApiaryCommand, Guid>
     {
         public async Task<Guid> Handle(CreateApiaryCommand request, CancellationToken cancellationToken)
         {
-            var apiary = new Apiary
-            {
-                Name = request.Name,
-                Location = request.Location,
-            };
+            var apiary = new Apiary(request.Name, request.Location);
 
             apiary.AddDomainEvent(new ApiaryCreatedEvent(apiary));
 
-            applicationDbContext.Apiaries.Add(apiary);
+            dbContext.Apiaries.Add(apiary);
 
-            await applicationDbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
             return apiary.Id;
         }

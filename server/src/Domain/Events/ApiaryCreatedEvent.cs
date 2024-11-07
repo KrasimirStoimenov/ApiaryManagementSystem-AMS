@@ -3,7 +3,7 @@
 using ApiaryManagementSystem.Domain.Common;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
 
-public class ApiaryCreatedEvent(Apiary apiary) : BaseEvent
+public sealed class ApiaryCreatedEvent(Apiary apiary) : BaseEvent
 {
     public Apiary Apiary { get; } = apiary;
 }
