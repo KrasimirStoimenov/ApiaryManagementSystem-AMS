@@ -44,6 +44,48 @@
         ]
       }
     },
+    "/api/Apiaries/{id}": {
+      "put": {
+        "tags": [
+          "Apiaries"
+        ],
+        "operationId": "UpdateApiary",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateApiaryCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Users/register": {
       "post": {
         "tags": [
@@ -435,6 +477,22 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateApiaryCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
           "name": {
             "type": "string"
           },
