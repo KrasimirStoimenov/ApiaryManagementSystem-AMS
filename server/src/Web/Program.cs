@@ -1,7 +1,7 @@
 using ApiaryManagementSystem.Application;
 using ApiaryManagementSystem.Infrastructure;
-using ApiaryManagementSystem.Infrastructure.Data;
 using ApiaryManagementSystem.Web;
+using ApiaryManagementSystem.Web.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

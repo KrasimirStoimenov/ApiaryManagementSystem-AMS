@@ -1,8 +1,9 @@
-﻿using ApiaryManagementSystem.Application.Common.Exceptions;
+﻿namespace ApiaryManagementSystem.Web.Infrastructure;
+
+using ApiaryManagementSystem.Application.Common.Exceptions;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-
-namespace ApiaryManagementSystem.Web.Infrastructure;
 
 public class CustomExceptionHandler : IExceptionHandler
 {

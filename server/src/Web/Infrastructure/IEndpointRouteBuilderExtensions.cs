@@ -1,6 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace ApiaryManagementSystem.Web.Infrastructure;
 
-namespace ApiaryManagementSystem.Web.Infrastructure;
+using System.Diagnostics.CodeAnalysis;
+using Ardalis.GuardClauses;
 
 public static class IEndpointRouteBuilderExtensions
 {

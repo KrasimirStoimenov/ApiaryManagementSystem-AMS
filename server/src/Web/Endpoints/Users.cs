@@ -1,6 +1,7 @@
 ﻿using ApiaryManagementSystem.Infrastructure.Identity;
-
 namespace ApiaryManagementSystem.Web.Endpoints;
+
+using ApiaryManagementSystem.Web.Infrastructure;
 
 public class Users : EndpointGroupBase
 {

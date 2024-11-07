@@ -1,12 +1,13 @@
-﻿using ApiaryManagementSystem.Application.Common.Interfaces;
+﻿namespace ApiaryManagementSystem.Web;
+
+using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Infrastructure.Data;
+using ApiaryManagementSystem.Web.Infrastructure;
 using ApiaryManagementSystem.Web.Services;
 using Azure.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
 using NSwag.Generation.Processors.Security;
-
-namespace ApiaryManagementSystem.Web;
 
 public static class WebConfiguration
 {

@@ -1,8 +1,8 @@
-﻿using System.Security.Claims;
+﻿namespace ApiaryManagementSystem.Web.Services;
+
+using System.Security.Claims;
 
 using ApiaryManagementSystem.Application.Common.Interfaces;
-
-namespace ApiaryManagementSystem.Web.Services;
 
 public class CurrentUser : IUser
 {
