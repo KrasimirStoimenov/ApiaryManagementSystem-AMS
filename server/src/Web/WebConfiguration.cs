@@ -35,7 +35,7 @@ public static class WebConfiguration
             configure.Title = "ApiaryManagementSystem API";
 
             // Add JWT
-            configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+            configure.AddSecurity("JWT", [], new OpenApiSecurityScheme
             {
                 Type = OpenApiSecuritySchemeType.ApiKey,
                 Name = "Authorization",

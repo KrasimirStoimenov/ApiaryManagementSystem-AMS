@@ -78,7 +78,7 @@ public class ApplicationDbContextInitialiser(
         }
     }
 
-    private async Task TrySeedDataAsync()
+    private static async Task TrySeedDataAsync()
     {
         // Default data
         // Seed, if necessary

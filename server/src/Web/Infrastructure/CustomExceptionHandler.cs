@@ -25,9 +25,9 @@ public class CustomExceptionHandler : IExceptionHandler
     {
         var exceptionType = exception.GetType();
 
-        if (_exceptionHandlers.ContainsKey(exceptionType))
+        if (_exceptionHandlers.TryGetValue(exceptionType, out Func<HttpContext, Exception, Task>? value))
         {
-            await _exceptionHandlers[exceptionType].Invoke(httpContext, exception);
+            await value.Invoke(httpContext, exception);
             return true;
         }
 
