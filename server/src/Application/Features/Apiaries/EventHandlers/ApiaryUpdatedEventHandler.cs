@@ -8,7 +8,7 @@ public sealed class ApiaryUpdatedEventHandler(ILogger<ApiaryUpdatedEventHandler>
 {
     public Task Handle(ApiaryUpdatedEvent notification, CancellationToken cancellationToken)
     {
-        logger.LogInformation("AMS Domain Event: {DomainEvent}. Updated entity id: {DomainEntityId}", notification.GetType().Name, notification.ApiaryId);
+        logger.LogInformation("Domain event fired: {DomainEvent}", notification.GetType().Name);
 
         return Task.CompletedTask;
     }

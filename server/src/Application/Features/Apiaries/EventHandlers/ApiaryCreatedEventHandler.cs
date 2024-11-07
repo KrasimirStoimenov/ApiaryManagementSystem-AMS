@@ -8,7 +8,7 @@ public sealed class ApiaryCreatedEventHandler(ILogger<ApiaryCreatedEventHandler>
 {
     public Task Handle(ApiaryCreatedEvent notification, CancellationToken cancellationToken)
     {
-        logger.LogInformation("AMS Domain Event: {DomainEvent}. Created entity: {DomainEntity}", notification.GetType().Name, notification.Apiary);
+        logger.LogInformation("Domain event fired: {DomainEvent}", notification.GetType().Name);
 
         return Task.CompletedTask;
     }

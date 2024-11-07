@@ -2,7 +2,6 @@
 
 using ApiaryManagementSystem.Domain.Common;
 
-public sealed class ApiaryUpdatedEvent(Guid apiaryId) : BaseEvent
+public sealed class ApiaryUpdatedEvent : BaseEvent
 {
-    public Guid ApiaryId { get; } = apiaryId;
 }

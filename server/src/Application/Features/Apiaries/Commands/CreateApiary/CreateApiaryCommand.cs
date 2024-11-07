@@ -19,9 +19,9 @@ public sealed class CreateApiaryCommand : IRequest<Guid>
         {
             var apiary = new Apiary(request.Name, request.Location);
 
-            apiary.AddDomainEvent(new ApiaryCreatedEvent(apiary));
-
             dbContext.Apiaries.Add(apiary);
+
+            apiary.AddDomainEvent(new ApiaryCreatedEvent());
 
             await dbContext.SaveChangesAsync(cancellationToken);
 

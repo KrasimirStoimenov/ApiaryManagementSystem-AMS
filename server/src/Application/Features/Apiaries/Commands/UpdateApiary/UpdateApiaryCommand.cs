@@ -26,7 +26,7 @@ public sealed class UpdateApiaryCommand : IRequest
                 .UpdateName(request.Name)
                 .UpdateLocation(request.Location);
 
-            apiary.AddDomainEvent(new ApiaryUpdatedEvent(apiary.Id));
+            apiary.AddDomainEvent(new ApiaryUpdatedEvent());
 
             await dbContext.SaveChangesAsync(cancellationToken);
         }
