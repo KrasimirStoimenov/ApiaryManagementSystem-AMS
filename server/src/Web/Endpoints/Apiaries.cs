@@ -1,8 +1,11 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
 
+using ApiaryManagementSystem.Application.Common.Models;
 using ApiaryManagementSystem.Application.Features.Apiaries.Commands.CreateApiary;
 using ApiaryManagementSystem.Application.Features.Apiaries.Commands.DeleteApiary;
 using ApiaryManagementSystem.Application.Features.Apiaries.Commands.UpdateApiary;
+using ApiaryManagementSystem.Application.Features.Apiaries.Queries.GetApiaries;
+using ApiaryManagementSystem.Application.Features.Apiaries.Queries.GetApiaries.Models;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 
@@ -12,9 +15,14 @@ public class Apiaries : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
+            .MapGet(GetApiaries)
             .MapPost(CreateApiary)
             .MapPut(UpdateApiary, "{id}")
             .MapDelete(DeleteApiary, "{id}");
+    }
+    public async Task<PaginatedList<ApiaryModel>> GetApiaries(ISender sender, [AsParameters] GetApiariesQuery query)
+    {
+        return await sender.Send(query);
     }
 
     public async Task<Guid> CreateApiary(ISender sender, CreateApiaryCommand command)
@@ -37,6 +45,6 @@ public class Apiaries : EndpointGroupBase
     public async Task<IResult> DeleteApiary(ISender sender, Guid id)
     {
         await sender.Send(new DeleteApiaryCommand() { Id = id });
-        return Results.NoContent();
+        return Results.Ok();
     }
 }
