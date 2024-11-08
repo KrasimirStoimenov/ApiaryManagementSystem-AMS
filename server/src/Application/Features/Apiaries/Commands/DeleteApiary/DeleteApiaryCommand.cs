@@ -12,21 +12,23 @@ public sealed class DeleteApiaryCommand() : IRequest
 {
     public Guid Id { get; init; }
 
-    internal sealed class DeleteApiaryCommandHandler(IApplicationDbContext dbContext) : IRequestHandler<DeleteApiaryCommand>
+}
+
+internal sealed class DeleteApiaryCommandHandler(IApplicationDbContext dbContext) : IRequestHandler<DeleteApiaryCommand>
+{
+    public async Task Handle(DeleteApiaryCommand request, CancellationToken cancellationToken)
     {
-        public async Task Handle(DeleteApiaryCommand request, CancellationToken cancellationToken)
-        {
-            var apiary = await dbContext.Apiaries
-                .Where(x => x.Id == request.Id)
-                .FirstOrDefaultAsync(cancellationToken);
+        var apiary = await dbContext.Apiaries
+            .Where(x => x.Id == request.Id)
+            .FirstOrDefaultAsync(cancellationToken);
 
-            Guard.Against.NotFound(request.Id, apiary);
+        Guard.Against.NotFound(request.Id, apiary);
 
-            dbContext.Apiaries.Remove(apiary);
+        dbContext.Apiaries.Remove(apiary);
 
-            apiary.AddDomainEvent(new ApiaryDeletedEvent());
+        apiary.AddDomainEvent(new ApiaryDeletedEvent());
 
-            await dbContext.SaveChangesAsync(cancellationToken);
-        }
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
+

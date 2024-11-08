@@ -13,22 +13,23 @@ using Microsoft.EntityFrameworkCore;
 public sealed class GetApiaryByIdQuery : IRequest<ApiaryModel>
 {
     public Guid ApiaryId { get; init; }
+}
 
-    internal sealed class GetApiaryByIdQueryHandler(
-        IApplicationDbContext dbContext,
-        IMapper mapper) : IRequestHandler<GetApiaryByIdQuery, ApiaryModel>
+internal sealed class GetApiaryByIdQueryHandler(
+    IApplicationDbContext dbContext,
+    IMapper mapper) : IRequestHandler<GetApiaryByIdQuery, ApiaryModel>
+{
+    public async Task<ApiaryModel> Handle(GetApiaryByIdQuery request, CancellationToken cancellationToken)
     {
-        public async Task<ApiaryModel> Handle(GetApiaryByIdQuery request, CancellationToken cancellationToken)
-        {
-            var apiary = await dbContext.Apiaries
-                .Where(x => x.Id == request.ApiaryId)
-                .AsNoTracking()
-                .ProjectTo<ApiaryModel>(mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync(cancellationToken);
+        var apiary = await dbContext.Apiaries
+            .Where(x => x.Id == request.ApiaryId)
+            .AsNoTracking()
+            .ProjectTo<ApiaryModel>(mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken);
 
-            Guard.Against.NotFound(request.ApiaryId, apiary);
+        Guard.Against.NotFound(request.ApiaryId, apiary);
 
-            return apiary;
-        }
+        return apiary;
     }
 }
+

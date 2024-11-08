@@ -16,20 +16,21 @@ public sealed class GetApiariesQuery : IRequest<PaginatedList<ApiaryModel>>
     public int? Page { get; init; }
 
     public int? PageSize { get; init; }
+}
 
-    internal sealed class GetApiariesWithPaginationQueryHandler(
-        IApplicationDbContext dbContext,
-        IMapper mapper) : IRequestHandler<GetApiariesQuery, PaginatedList<ApiaryModel>>
+internal sealed class GetApiariesWithPaginationQueryHandler(
+    IApplicationDbContext dbContext,
+    IMapper mapper) : IRequestHandler<GetApiariesQuery, PaginatedList<ApiaryModel>>
+{
+    public async Task<PaginatedList<ApiaryModel>> Handle(GetApiariesQuery request, CancellationToken cancellationToken)
     {
-        public async Task<PaginatedList<ApiaryModel>> Handle(GetApiariesQuery request, CancellationToken cancellationToken)
-        {
-            int page = request.Page ?? DefaultPage;
-            int pageSize = request.PageSize ?? DefaultPageSize;
+        int page = request.Page ?? DefaultPage;
+        int pageSize = request.PageSize ?? DefaultPageSize;
 
-            return await dbContext.Apiaries
-                .AsNoTracking()
-                .ProjectTo<ApiaryModel>(mapper.ConfigurationProvider)
-                .ToPaginatedListAsync(page, pageSize);
-        }
+        return await dbContext.Apiaries
+            .AsNoTracking()
+            .ProjectTo<ApiaryModel>(mapper.ConfigurationProvider)
+            .ToPaginatedListAsync(page, pageSize);
     }
 }
+
