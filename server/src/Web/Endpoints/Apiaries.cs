@@ -23,19 +23,13 @@ public class Apiaries : EndpointGroupBase
             .MapDelete(DeleteApiary, "{id}");
     }
     public async Task<PaginatedList<ApiaryModel>> GetApiaries(ISender sender, [AsParameters] GetApiariesQuery query)
-    {
-        return await sender.Send(query);
-    }
+        => await sender.Send(query);
 
     public async Task<ApiaryModel> GetApiaryById(ISender sender, Guid id)
-    {
-        return await sender.Send(new GetApiaryByIdQuery() { ApiaryId = id });
-    }
+        => await sender.Send(new GetApiaryByIdQuery() { ApiaryId = id });
 
     public async Task<Guid> CreateApiary(ISender sender, CreateApiaryCommand command)
-    {
-        return await sender.Send(command);
-    }
+        => await sender.Send(command);
 
     public async Task<IResult> UpdateApiary(ISender sender, Guid id, UpdateApiaryCommand command)
     {
