@@ -194,6 +194,39 @@
         ]
       }
     },
+    "/api/Hives": {
+      "post": {
+        "tags": [
+          "Hives"
+        ],
+        "operationId": "CreateHive",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHiveCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Users/register": {
       "post": {
         "tags": [
@@ -656,6 +689,33 @@
           },
           "location": {
             "type": "string"
+          }
+        }
+      },
+      "CreateHiveCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBought": {
+            "type": "string",
+            "format": "date"
+          },
+          "apiaryId": {
+            "type": "string",
+            "format": "guid"
           }
         }
       },

@@ -3,19 +3,25 @@
 using ApiaryManagementSystem.Domain.Common;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
 
-public sealed class Hive : BaseAuditableEntity
+public sealed class Hive(
+    string number,
+    string type,
+    string status,
+    string? color,
+    DateOnly dateBought,
+    Guid apiaryId) : BaseAuditableEntity
 {
-    public required string Number { get; init; }
+    public string Number { get; init; } = number;
 
-    public required string Type { get; init; }
+    public string Type { get; init; } = type;
 
-    public required string Status { get; init; }
+    public string Status { get; init; } = status;
 
-    public string? Color { get; init; }
+    public string? Color { get; init; } = color;
 
-    public DateOnly DateBought { get; init; }
+    public DateOnly DateBought { get; init; } = dateBought;
 
-    public Guid ApiaryId { get; init; }
+    public Guid ApiaryId { get; init; } = apiaryId;
 
-    public required Apiary Apiary { get; init; }
+    public Apiary Apiary { get; init; } = null!;    // Required reference navigation to principal
 }
