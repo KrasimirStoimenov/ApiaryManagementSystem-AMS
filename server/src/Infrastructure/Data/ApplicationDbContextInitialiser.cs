@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 public class ApplicationDbContextInitialiser(
     ILogger<ApplicationDbContextInitialiser> logger,
-    ApplicationDbContext context,
+    ApplicationDbContext dbContext,
     UserManager<ApplicationUser> userManager,
     RoleManager<IdentityRole> roleManager)
 {
@@ -18,7 +18,7 @@ public class ApplicationDbContextInitialiser(
     {
         try
         {
-            await context.Database.MigrateAsync();
+            await dbContext.Database.MigrateAsync();
         }
         catch (Exception ex)
         {
