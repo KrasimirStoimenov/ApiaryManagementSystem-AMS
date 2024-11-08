@@ -3,7 +3,7 @@
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Mappings;
 using ApiaryManagementSystem.Application.Common.Models;
-using ApiaryManagementSystem.Application.Features.Apiaries.Queries.GetApiaries.Models;
+using ApiaryManagementSystem.Application.Features.Apiaries.Queries;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
