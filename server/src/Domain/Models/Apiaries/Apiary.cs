@@ -1,18 +1,15 @@
 ﻿namespace ApiaryManagementSystem.Domain.Models.Apiaries;
 
 using ApiaryManagementSystem.Domain.Common;
+using ApiaryManagementSystem.Domain.Models.Hives;
 
-public sealed class Apiary : BaseAuditableEntity
+public sealed class Apiary(string name, string location) : BaseAuditableEntity
 {
-    public Apiary(string name, string location)
-    {
-        this.Name = name;
-        this.Location = location;
-    }
+    public string Name { get; private set; } = name;
 
-    public string Name { get; private set; }
+    public string Location { get; private set; } = location;
 
-    public string Location { get; private set; }
+    public IReadOnlyCollection<Hive> Hives { get; init; } = [];
 
     public Apiary UpdateName(string name)
     {

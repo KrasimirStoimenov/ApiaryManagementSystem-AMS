@@ -13,4 +13,14 @@ public sealed class Models
         public const int LocationMinLength = 1;
         public const int LocationMaxLength = 50;
     }
+    public class Hive
+    {
+        public const int NumberMinLength = 1;
+        public const int NumberMaxLength = 30;
+        public const int TypeMinLength = 3;
+        public const int TypeMaxLength = 30;
+        public const int StatusMinLength = 3;
+        public const int StatusMaxLength = 30;
+        public const int ColorMaxLength = 30;
+    }
 }
