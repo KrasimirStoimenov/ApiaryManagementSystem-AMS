@@ -1,10 +1,12 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
 
+using ApiaryManagementSystem.Application.Common.Models;
 using ApiaryManagementSystem.Application.Features.Hives;
 using ApiaryManagementSystem.Application.Features.Hives.Commands.CreateHive;
 using ApiaryManagementSystem.Application.Features.Hives.Commands.DeleteHive;
 using ApiaryManagementSystem.Application.Features.Hives.Commands.UpdateHive;
 using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHiveById;
+using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHives;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 
@@ -13,11 +15,16 @@ public class Hives : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
+            .RequireAuthorization()
+            .MapGet(GetHives)
             .MapGet(GetHiveById, "{id}")
             .MapPost(CreateHive)
             .MapPut(UpdateHive, "{id}")
             .MapDelete(DeleteHive, "{id}");
     }
+
+    public async Task<PaginatedList<HiveModel>> GetHives(ISender sender, [AsParameters] GetHivesQuery query)
+        => await sender.Send(query);
 
     public async Task<HiveModel> GetHiveById(ISender sender, Guid id)
         => await sender.Send(new GetHiveByIdQuery() { HiveId = id });
