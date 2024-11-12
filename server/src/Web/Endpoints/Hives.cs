@@ -12,6 +12,10 @@ public class Hives : EndpointGroupBase
             .MapPost(CreateHive);
     }
 
-    public async Task<Guid> CreateHive(ISender sender, CreateHiveCommand command)
-        => await sender.Send(command);
+    public async Task<IResult> CreateHive(ISender sender, CreateHiveCommand command)
+    {
+        var hiveId = await sender.Send(command);
+
+        return Results.CreatedAtRoute("GetHiveById", new { id = hiveId }, hiveId);
+    }
 }

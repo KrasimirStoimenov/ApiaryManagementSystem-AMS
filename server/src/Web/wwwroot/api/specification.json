@@ -70,16 +70,8 @@
           "x-position": 1
         },
         "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string",
-                  "format": "guid"
-                }
-              }
-            }
+          "201": {
+            "description": ""
           }
         },
         "security": [
@@ -213,16 +205,8 @@
           "x-position": 1
         },
         "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string",
-                  "format": "guid"
-                }
-              }
-            }
+          "201": {
+            "description": ""
           }
         }
       }

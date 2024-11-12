@@ -28,8 +28,12 @@ public class Apiaries : EndpointGroupBase
     public async Task<ApiaryModel> GetApiaryById(ISender sender, Guid id)
         => await sender.Send(new GetApiaryByIdQuery() { ApiaryId = id });
 
-    public async Task<Guid> CreateApiary(ISender sender, CreateApiaryCommand command)
-        => await sender.Send(command);
+    public async Task<IResult> CreateApiary(ISender sender, CreateApiaryCommand command)
+    {
+        var apiaryId = await sender.Send(command);
+
+        return Results.CreatedAtRoute(nameof(GetApiaryById), new { id = apiaryId }, apiaryId);
+    }
 
     public async Task<IResult> UpdateApiary(ISender sender, Guid id, UpdateApiaryCommand command)
     {
