@@ -14,6 +14,15 @@
         "operationId": "GetApiaries",
         "parameters": [
           {
+            "name": "SearchTerm",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
             "name": "Page",
             "in": "query",
             "schema": {
@@ -21,7 +30,7 @@
               "format": "int32",
               "nullable": true
             },
-            "x-position": 1
+            "x-position": 2
           },
           {
             "name": "PageSize",
@@ -31,7 +40,7 @@
               "format": "int32",
               "nullable": true
             },
-            "x-position": 2
+            "x-position": 3
           }
         ],
         "responses": {
@@ -197,6 +206,15 @@
         "operationId": "GetHives",
         "parameters": [
           {
+            "name": "SearchTerm",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
             "name": "Page",
             "in": "query",
             "schema": {
@@ -204,7 +222,7 @@
               "format": "int32",
               "nullable": true
             },
-            "x-position": 1
+            "x-position": 2
           },
           {
             "name": "PageSize",
@@ -214,7 +232,7 @@
               "format": "int32",
               "nullable": true
             },
-            "x-position": 2
+            "x-position": 3
           }
         ],
         "responses": {

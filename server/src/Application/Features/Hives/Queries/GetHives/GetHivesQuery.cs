@@ -8,12 +8,13 @@ using ApiaryManagementSystem.Application.Common.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 using static Common.Constants.ApplicationConstants.Pagination;
 
 public sealed class GetHivesQuery : IRequest<PaginatedList<HiveModel>>
 {
+    public string? SearchTerm { get; init; }
+
     public int? Page { get; init; }
 
     public int? PageSize { get; init; }
@@ -27,9 +28,20 @@ internal sealed class GetHivesQueryHandler(
     {
         int page = request.Page ?? DefaultPage;
         int pageSize = request.PageSize ?? DefaultPageSize;
+        var searchTerm = request.SearchTerm;
 
-        return await dbContext.Hives
-            .AsNoTracking()
+        var hivesQuery = dbContext.Hives.AsQueryable();
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            hivesQuery = hivesQuery.Where(x => (
+                x.Number.Contains(searchTerm) ||
+                x.Status.Contains(searchTerm) ||
+                x.Type.Contains(searchTerm)) ||
+                x.DateBought.ToString().Contains(searchTerm));
+        }
+
+        return await hivesQuery
             .ProjectTo<HiveModel>(mapper.ConfigurationProvider)
             .ToPaginatedListAsync<HiveModel>(page, pageSize);
     }

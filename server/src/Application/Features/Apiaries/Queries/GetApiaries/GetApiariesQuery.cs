@@ -7,12 +7,13 @@ using ApiaryManagementSystem.Application.Features.Apiaries.Queries;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 using static ApiaryManagementSystem.Application.Common.Constants.ApplicationConstants.Pagination;
 
 public sealed class GetApiariesQuery : IRequest<PaginatedList<ApiaryModel>>
 {
+    public string? SearchTerm { get; init; }
+
     public int? Page { get; init; }
 
     public int? PageSize { get; init; }
@@ -27,8 +28,15 @@ internal sealed class GetApiariesWithPaginationQueryHandler(
         int page = request.Page ?? DefaultPage;
         int pageSize = request.PageSize ?? DefaultPageSize;
 
-        return await dbContext.Apiaries
-            .AsNoTracking()
+        var apiariesQuery = dbContext.Apiaries.AsQueryable();
+
+        if (!string.IsNullOrEmpty(request.SearchTerm))
+        {
+            apiariesQuery = apiariesQuery.Where(x =>
+                (x.Name.Contains(request.SearchTerm) || x.Location.Contains(request.SearchTerm)));
+        }
+
+        return await apiariesQuery
             .ProjectTo<ApiaryModel>(mapper.ConfigurationProvider)
             .ToPaginatedListAsync(page, pageSize);
     }
