@@ -31,7 +31,9 @@ public static class IEndpointRouteBuilderExtensions
         Guard.Against.AnonymousMethod(handler);
 
         builder.MapPut(pattern, handler)
-            .WithName(handler.Method.Name);
+            .WithName(handler.Method.Name)
+            .Produces(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status400BadRequest);
 
         return builder;
     }

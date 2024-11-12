@@ -39,7 +39,8 @@ public class Apiaries : EndpointGroupBase
     {
         if (id != command.Id)
         {
-            return Results.BadRequest();
+            //TODO: Refactor to returns more specific error
+            return Results.BadRequest("Ids for url and command not matched.");
         }
 
         await sender.Send(command);

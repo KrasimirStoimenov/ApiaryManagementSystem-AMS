@@ -11,17 +11,33 @@ public sealed class Hive(
     DateOnly dateBought,
     Guid apiaryId) : BaseAuditableEntity
 {
-    public string Number { get; init; } = number;
+    public string Number { get; private set; } = number;
 
-    public string Type { get; init; } = type;
+    public string Type { get; private set; } = type;
 
-    public string Status { get; init; } = status;
+    public string Status { get; private set; } = status;
 
-    public string? Color { get; init; } = color;
+    public string? Color { get; private set; } = color;
 
-    public DateOnly DateBought { get; init; } = dateBought;
+    public DateOnly DateBought { get; private set; } = dateBought;
 
-    public Guid ApiaryId { get; init; } = apiaryId;
+    public Guid ApiaryId { get; private set; } = apiaryId;
 
     public Apiary Apiary { get; init; } = null!;    // Required reference navigation to principal
+
+    public void UpdateHive(
+        string number,
+        string type,
+        string status,
+        string? color,
+        DateOnly dateBought,
+        Guid apiaryId)
+    {
+        this.Number = number;
+        this.Type = type;
+        this.Status = status;
+        this.Color = color;
+        this.DateBought = dateBought;
+        this.ApiaryId = apiaryId;
+    }
 }

@@ -2,6 +2,6 @@
 
 using ApiaryManagementSystem.Domain.Common;
 
-public sealed class HiveCreatedEvent : BaseEvent
+public sealed class HiveUpdatedEvent : BaseEvent
 {
 }

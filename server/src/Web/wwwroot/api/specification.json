@@ -147,7 +147,10 @@
           "x-position": 2
         },
         "responses": {
-          "200": {
+          "204": {
+            "description": ""
+          },
+          "400": {
             "description": ""
           }
         },
@@ -206,6 +209,69 @@
         },
         "responses": {
           "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Hives/{id}": {
+      "put": {
+        "tags": [
+          "Hives"
+        ],
+        "operationId": "UpdateHive",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHiveCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hives"
+        ],
+        "operationId": "DeleteHive",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
             "description": ""
           }
         }
@@ -680,6 +746,37 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBought": {
+            "type": "string",
+            "format": "date"
+          },
+          "apiaryId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "UpdateHiveCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
           "number": {
             "type": "string"
           },
