@@ -189,32 +189,37 @@
         ]
       }
     },
-    "/api/Hives": {
-      "post": {
+    "/api/Hives/{id}": {
+      "get": {
         "tags": [
           "Hives"
         ],
-        "operationId": "CreateHive",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateHiveCommand"
+        "operationId": "GetHiveById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HiveModel"
+                }
               }
             }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "201": {
-            "description": ""
           }
         }
-      }
-    },
-    "/api/Hives/{id}": {
+      },
       "put": {
         "tags": [
           "Hives"
@@ -272,6 +277,31 @@
         ],
         "responses": {
           "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Hives": {
+      "post": {
+        "tags": [
+          "Hives"
+        ],
+        "operationId": "CreateHive",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHiveCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
             "description": ""
           }
         }
@@ -739,6 +769,37 @@
           },
           "location": {
             "type": "string"
+          }
+        }
+      },
+      "HiveModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBought": {
+            "type": "string",
+            "format": "date"
+          },
+          "apiaryId": {
+            "type": "string",
+            "format": "guid"
           }
         }
       },
