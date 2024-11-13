@@ -14,8 +14,6 @@ public sealed class Inspection : BaseAuditableEntity
 
     public required Frames WithHoney { get; init; }
 
-    public required Frames FullWithHoney { get; init; }
-
     public required Frames WithPollen { get; init; }
 
     public required Frames WithFreeSpace { get; init; }
@@ -34,6 +32,5 @@ public sealed class Inspection : BaseAuditableEntity
 
     public bool AreDroneCellsPresent { get; init; }
 
-    public required string Notes { get; init; }
-
+    public string? Notes { get; init; }
 }

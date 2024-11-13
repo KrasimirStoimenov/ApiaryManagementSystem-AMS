@@ -23,4 +23,9 @@ public sealed class Models
         public const int StatusMaxLength = 30;
         public const int ColorMaxLength = 30;
     }
+
+    public class Inspection
+    {
+        public const int NotesMaxLength = 500;
+    }
 }
