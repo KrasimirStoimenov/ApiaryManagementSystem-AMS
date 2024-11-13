@@ -2,35 +2,50 @@
 
 namespace ApiaryManagementSystem.Domain.Models.Inspections;
 
-public sealed class Inspection : BaseAuditableEntity
+public sealed class Inspection(
+    DateTime inspectionDate,
+    ColonyStrength colonyStrength,
+    Frames cappedBrood,
+    Frames uncappedBrood,
+    Frames withHoney,
+    Frames withPollen,
+    Frames withFreeSpace,
+    BroodPattern broodPattern,
+    BeeBehaviour beeBehaviour,
+    SwarmingState swarmingState,
+    bool isQueenPresent,
+    bool areEggsPresent,
+    bool areQueenCellsPresent,
+    bool areDroneCellPresent,
+    string? notes) : BaseAuditableEntity
 {
-    public DateTime InspectionDate { get; init; }
+    public DateTime InspectionDate { get; init; } = inspectionDate;
 
-    public required ColonyStrength ColonyStrength { get; init; }
+    public required ColonyStrength ColonyStrength { get; init; } = colonyStrength;
 
-    public required Frames CappedBrood { get; init; }
+    public required Frames CappedBrood { get; init; } = cappedBrood;
 
-    public required Frames UncappedBrood { get; init; }
+    public required Frames UncappedBrood { get; init; } = uncappedBrood;
 
-    public required Frames WithHoney { get; init; }
+    public required Frames WithHoney { get; init; } = withHoney;
 
-    public required Frames WithPollen { get; init; }
+    public required Frames WithPollen { get; init; } = withPollen;
 
-    public required Frames WithFreeSpace { get; init; }
+    public required Frames WithFreeSpace { get; init; } = withFreeSpace;
 
-    public required BroodPattern BroodPattern { get; init; }
+    public required BroodPattern BroodPattern { get; init; } = broodPattern;
 
-    public required BeeBehaviour BeeBehaviour { get; init; }
+    public required BeeBehaviour BeeBehaviour { get; init; } = beeBehaviour;
 
-    public required SwarmingState SwarmingState { get; init; }
+    public required SwarmingState SwarmingState { get; init; } = swarmingState;
 
-    public bool IsQueenPresent { get; init; }
+    public bool IsQueenPresent { get; init; } = isQueenPresent;
 
-    public bool AreEggsPresent { get; init; }
+    public bool AreEggsPresent { get; init; } = areEggsPresent;
 
-    public bool AreQueenCellsPresent { get; init; }
+    public bool AreQueenCellsPresent { get; init; } = areQueenCellsPresent;
 
-    public bool AreDroneCellsPresent { get; init; }
+    public bool AreDroneCellsPresent { get; init; } = areDroneCellPresent;
 
-    public string? Notes { get; init; }
+    public string? Notes { get; init; } = notes;
 }
