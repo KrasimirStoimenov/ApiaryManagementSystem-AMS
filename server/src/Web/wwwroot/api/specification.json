@@ -390,6 +390,31 @@
         ]
       }
     },
+    "/api/Inspections": {
+      "post": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "CreateInspection",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInspectionCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/Users/register": {
       "post": {
         "tags": [
@@ -977,6 +1002,132 @@
             "format": "guid"
           }
         }
+      },
+      "CreateInspectionCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "inspectionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "colonyStrength": {
+            "$ref": "#/components/schemas/ColonyStrength"
+          },
+          "framesWithCappedBrood": {
+            "$ref": "#/components/schemas/Frames"
+          },
+          "framesWithUncappedBrood": {
+            "$ref": "#/components/schemas/Frames"
+          },
+          "framesWithHoney": {
+            "$ref": "#/components/schemas/Frames"
+          },
+          "framesWithPollen": {
+            "$ref": "#/components/schemas/Frames"
+          },
+          "framesWithFreeSpace": {
+            "$ref": "#/components/schemas/Frames"
+          },
+          "broodPattern": {
+            "$ref": "#/components/schemas/BroodPattern"
+          },
+          "beeBehaviour": {
+            "$ref": "#/components/schemas/BeeBehaviour"
+          },
+          "swarmingState": {
+            "$ref": "#/components/schemas/SwarmingState"
+          },
+          "isQueenPresent": {
+            "type": "boolean"
+          },
+          "areEggsPresent": {
+            "type": "boolean"
+          },
+          "areQueenCellsPresent": {
+            "type": "boolean"
+          },
+          "areDroneCellsPresent": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "ColonyStrength": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Enumeration"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Enumeration": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Frames": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Enumeration"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BroodPattern": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Enumeration"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BeeBehaviour": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Enumeration"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "SwarmingState": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Enumeration"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
       },
       "HttpValidationProblemDetails": {
         "allOf": [

@@ -23,23 +23,23 @@ public sealed class Inspection(
 {
     public DateTime InspectionDate { get; init; } = inspectionDate;
 
-    public required ColonyStrength ColonyStrength { get; init; } = colonyStrength;
+    public ColonyStrength ColonyStrength { get; init; } = colonyStrength;
 
-    public required Frames FramesWithCappedBrood { get; init; } = framesWithCappedBrood;
+    public Frames FramesWithCappedBrood { get; init; } = framesWithCappedBrood;
 
-    public required Frames FramesWithUncappedBrood { get; init; } = framesWithUncappedBrood;
+    public Frames FramesWithUncappedBrood { get; init; } = framesWithUncappedBrood;
 
-    public required Frames FramesWithHoney { get; init; } = framesWithHoney;
+    public Frames FramesWithHoney { get; init; } = framesWithHoney;
 
-    public required Frames FramesWithPollen { get; init; } = framesWithPollen;
+    public Frames FramesWithPollen { get; init; } = framesWithPollen;
 
-    public required Frames FramesWithFreeSpace { get; init; } = framesWithFreeSpace;
+    public Frames FramesWithFreeSpace { get; init; } = framesWithFreeSpace;
 
-    public required BroodPattern BroodPattern { get; init; } = broodPattern;
+    public BroodPattern BroodPattern { get; init; } = broodPattern;
 
-    public required BeeBehaviour BeeBehaviour { get; init; } = beeBehaviour;
+    public BeeBehaviour BeeBehaviour { get; init; } = beeBehaviour;
 
-    public required SwarmingState SwarmingState { get; init; } = swarmingState;
+    public SwarmingState SwarmingState { get; init; } = swarmingState;
 
     public bool IsQueenPresent { get; init; } = isQueenPresent;
 
