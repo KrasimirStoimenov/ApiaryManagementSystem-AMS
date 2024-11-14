@@ -1,37 +1,39 @@
 ﻿using ApiaryManagementSystem.Domain.Common;
+using ApiaryManagementSystem.Domain.Models.Hives;
 
 namespace ApiaryManagementSystem.Domain.Models.Inspections;
 
 public sealed class Inspection(
     DateTime inspectionDate,
     ColonyStrength colonyStrength,
-    Frames cappedBrood,
-    Frames uncappedBrood,
-    Frames withHoney,
-    Frames withPollen,
-    Frames withFreeSpace,
+    Frames framesWithCappedBrood,
+    Frames framesWithUncappedBrood,
+    Frames framesWithHoney,
+    Frames framesWithPollen,
+    Frames framesWithFreeSpace,
     BroodPattern broodPattern,
     BeeBehaviour beeBehaviour,
     SwarmingState swarmingState,
     bool isQueenPresent,
     bool areEggsPresent,
     bool areQueenCellsPresent,
-    bool areDroneCellPresent,
-    string? notes) : BaseAuditableEntity
+    bool areDroneCellsPresent,
+    string? notes,
+    Guid hiveId) : BaseAuditableEntity
 {
     public DateTime InspectionDate { get; init; } = inspectionDate;
 
     public required ColonyStrength ColonyStrength { get; init; } = colonyStrength;
 
-    public required Frames CappedBrood { get; init; } = cappedBrood;
+    public required Frames FramesWithCappedBrood { get; init; } = framesWithCappedBrood;
 
-    public required Frames UncappedBrood { get; init; } = uncappedBrood;
+    public required Frames FramesWithUncappedBrood { get; init; } = framesWithUncappedBrood;
 
-    public required Frames WithHoney { get; init; } = withHoney;
+    public required Frames FramesWithHoney { get; init; } = framesWithHoney;
 
-    public required Frames WithPollen { get; init; } = withPollen;
+    public required Frames FramesWithPollen { get; init; } = framesWithPollen;
 
-    public required Frames WithFreeSpace { get; init; } = withFreeSpace;
+    public required Frames FramesWithFreeSpace { get; init; } = framesWithFreeSpace;
 
     public required BroodPattern BroodPattern { get; init; } = broodPattern;
 
@@ -45,7 +47,11 @@ public sealed class Inspection(
 
     public bool AreQueenCellsPresent { get; init; } = areQueenCellsPresent;
 
-    public bool AreDroneCellsPresent { get; init; } = areDroneCellPresent;
+    public bool AreDroneCellsPresent { get; init; } = areDroneCellsPresent;
 
     public string? Notes { get; init; } = notes;
+
+    public Guid HiveId { get; init; } = hiveId;
+
+    public Hive Hive { get; init; } = null!;    // Required reference navigation to principal
 }

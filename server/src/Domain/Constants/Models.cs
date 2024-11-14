@@ -6,6 +6,7 @@ public sealed class Models
     {
         public const int NameMinLength = 2;
         public const int NameMaxLength = 20;
+        public const int EnumerationNameMaxLength = 100;
     }
 
     public class Apiary

@@ -2,6 +2,7 @@
 
 using ApiaryManagementSystem.Domain.Models.Apiaries;
 using ApiaryManagementSystem.Domain.Models.Hives;
+using ApiaryManagementSystem.Domain.Models.Inspections;
 using Microsoft.EntityFrameworkCore;
 
 public interface IApplicationDbContext
@@ -9,6 +10,8 @@ public interface IApplicationDbContext
     DbSet<Apiary> Apiaries { get; }
 
     DbSet<Hive> Hives { get; }
+
+    DbSet<Inspection> Inspections { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
