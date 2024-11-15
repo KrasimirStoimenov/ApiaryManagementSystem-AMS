@@ -160,7 +160,14 @@
             "description": ""
           },
           "400": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -352,7 +359,14 @@
             "description": ""
           },
           "400": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -366,6 +380,196 @@
           "Hives"
         ],
         "operationId": "DeleteHive",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Inspections": {
+      "get": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "GetInspections",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedListOfInspectionModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "CreateInspection",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInspectionCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Inspections/{id}": {
+      "get": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "GetInspectionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "UpdateInspection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInspectionCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "DeleteInspection",
         "parameters": [
           {
             "name": "id",
@@ -839,6 +1043,35 @@
           }
         }
       },
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "UpdateApiaryCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -978,6 +1211,309 @@
           }
         }
       },
+      "PaginatedListOfInspectionModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InspectionModel"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        }
+      },
+      "InspectionModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "inspectionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "colonyStrength": {
+            "type": "string"
+          },
+          "framesWithCappedBrood": {
+            "type": "string"
+          },
+          "framesWithUncappedBrood": {
+            "type": "string"
+          },
+          "framesWithHoney": {
+            "type": "string"
+          },
+          "framesWithPollen": {
+            "type": "string"
+          },
+          "framesWithFreeSpace": {
+            "type": "string"
+          },
+          "broodPattern": {
+            "type": "string"
+          },
+          "beeBehaviour": {
+            "type": "string"
+          },
+          "swarmingState": {
+            "type": "string"
+          },
+          "isQueenPresent": {
+            "type": "boolean"
+          },
+          "areEggsPresent": {
+            "type": "boolean"
+          },
+          "areQueenCellsPresent": {
+            "type": "boolean"
+          },
+          "areDroneCellsPresent": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "CreateInspectionCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "inspectionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "colonyStrength": {
+            "$ref": "#/components/schemas/ColonyStrengthRequestEnum"
+          },
+          "framesWithCappedBrood": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithUncappedBrood": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithHoney": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithPollen": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithFreeSpace": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "broodPattern": {
+            "$ref": "#/components/schemas/BroodPatternRequestEnum"
+          },
+          "beeBehaviour": {
+            "$ref": "#/components/schemas/BeeBehaviourRequestEnum"
+          },
+          "swarmingState": {
+            "$ref": "#/components/schemas/SwarmingStateRequestEnum"
+          },
+          "isQueenPresent": {
+            "type": "boolean"
+          },
+          "areEggsPresent": {
+            "type": "boolean"
+          },
+          "areQueenCellsPresent": {
+            "type": "boolean"
+          },
+          "areDroneCellsPresent": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "ColonyStrengthRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Queenless",
+          "Collapsing",
+          "Nucleus",
+          "Weak",
+          "Moderate",
+          "Strong"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "FramesRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "None",
+          "One",
+          "Few",
+          "Several",
+          "Many",
+          "All"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "BroodPatternRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Solid",
+          "Spotty",
+          "Rainbow",
+          "Drone",
+          "Checkerboard",
+          "Patchy",
+          "Shotgun"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "BeeBehaviourRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Calm",
+          "Aggressive"
+        ],
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "SwarmingStateRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "PreSwarming",
+          "SwarmingPreparation",
+          "PrimarySwarm",
+          "PostSwarm"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "UpdateInspectionCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "inspectionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "colonyStrength": {
+            "$ref": "#/components/schemas/ColonyStrengthRequestEnum"
+          },
+          "framesWithCappedBrood": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithUncappedBrood": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithHoney": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithPollen": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithFreeSpace": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "broodPattern": {
+            "$ref": "#/components/schemas/BroodPatternRequestEnum"
+          },
+          "beeBehaviour": {
+            "$ref": "#/components/schemas/BeeBehaviourRequestEnum"
+          },
+          "swarmingState": {
+            "$ref": "#/components/schemas/SwarmingStateRequestEnum"
+          },
+          "isQueenPresent": {
+            "type": "boolean"
+          },
+          "areEggsPresent": {
+            "type": "boolean"
+          },
+          "areQueenCellsPresent": {
+            "type": "boolean"
+          },
+          "areDroneCellsPresent": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
       "HttpValidationProblemDetails": {
         "allOf": [
           {
@@ -1001,35 +1537,6 @@
             }
           }
         ]
-      },
-      "ProblemDetails": {
-        "type": "object",
-        "additionalProperties": {
-          "nullable": true
-        },
-        "properties": {
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "nullable": true
-          },
-          "instance": {
-            "type": "string",
-            "nullable": true
-          }
-        }
       },
       "RegisterRequest": {
         "type": "object",

@@ -5,6 +5,7 @@ using System.Reflection;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
 using ApiaryManagementSystem.Domain.Models.Hives;
+using ApiaryManagementSystem.Domain.Models.Inspections;
 using ApiaryManagementSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Apiary> Apiaries => Set<Apiary>();
 
     public DbSet<Hive> Hives => Set<Hive>();
+
+    public DbSet<Inspection> Inspections => Set<Inspection>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

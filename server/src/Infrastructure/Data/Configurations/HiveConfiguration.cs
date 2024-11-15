@@ -12,6 +12,12 @@ internal sealed class HiveConfiguration : IEntityTypeConfiguration<Hive>
     {
         builder.HasKey(x => x.Id);
 
+        builder
+            .HasOne(x => x.Apiary)
+            .WithMany(x => x.Hives)
+            .HasForeignKey(x => x.ApiaryId)
+            .IsRequired();
+
         builder.Property(x => x.Number)
             .HasMaxLength(NumberMaxLength)
             .IsRequired();
@@ -29,12 +35,6 @@ internal sealed class HiveConfiguration : IEntityTypeConfiguration<Hive>
             .IsRequired(false);
 
         builder.Property(x => x.DateBought)
-            .IsRequired();
-
-        builder
-            .HasOne(x => x.Apiary)
-            .WithMany(x => x.Hives)
-            .HasForeignKey(x => x.ApiaryId)
             .IsRequired();
     }
 }

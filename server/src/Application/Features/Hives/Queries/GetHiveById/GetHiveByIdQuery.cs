@@ -1,11 +1,11 @@
-﻿using ApiaryManagementSystem.Application.Common.Interfaces;
+﻿namespace ApiaryManagementSystem.Application.Features.Hives.Queries.GetHiveById;
+
+using ApiaryManagementSystem.Application.Common.Interfaces;
 using Ardalis.GuardClauses;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
-namespace ApiaryManagementSystem.Application.Features.Hives.Queries.GetHiveById;
 
 public sealed class GetHiveByIdQuery : IRequest<HiveModel>
 {
