@@ -1,8 +1,9 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
-
+using ApiaryManagementSystem.Application.Features.Inspections;
 using ApiaryManagementSystem.Application.Features.Inspections.Commands.CreateInspection;
 using ApiaryManagementSystem.Application.Features.Inspections.Commands.DeleteInspection;
 using ApiaryManagementSystem.Application.Features.Inspections.Commands.UpdateInspection;
+using ApiaryManagementSystem.Application.Features.Inspections.Queries.GetInspectionById;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 
@@ -11,18 +12,20 @@ public class Inspections : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
+            .MapGet(GetInspectionById, "{id}")
             .MapPost(CreateInspection)
             .MapPut(UpdateInspection, "{id}")
             .MapDelete(DeleteInspection, "{id}");
     }
 
+    public async Task<InspectionModel> GetInspectionById(ISender sender, Guid id)
+        => await sender.Send(new GetInspectionByIdQuery() { InspectionId = id });
+
     public async Task<IResult> CreateInspection(ISender sender, CreateInspectionCommand command)
     {
         var inspectionId = await sender.Send(command);
 
-        //return Results.CreatedAtRoute(nameof(GetHiveById), new { id = hiveId }, hiveId);
-
-        return Results.Ok(inspectionId);
+        return Results.CreatedAtRoute(nameof(GetInspectionById), new { id = inspectionId }, inspectionId);
     }
 
     public async Task<IResult> UpdateInspection(ISender sender, Guid id, UpdateInspectionCommand command)

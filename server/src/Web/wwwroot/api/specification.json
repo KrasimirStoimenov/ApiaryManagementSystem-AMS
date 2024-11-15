@@ -404,32 +404,37 @@
         ]
       }
     },
-    "/api/Inspections": {
-      "post": {
+    "/api/Inspections/{id}": {
+      "get": {
         "tags": [
           "Inspections"
         ],
-        "operationId": "CreateInspection",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateInspectionCommand"
+        "operationId": "GetInspectionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectionModel"
+                }
               }
             }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "201": {
-            "description": ""
           }
         }
-      }
-    },
-    "/api/Inspections/{id}": {
+      },
       "put": {
         "tags": [
           "Inspections"
@@ -494,6 +499,31 @@
         ],
         "responses": {
           "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Inspections": {
+      "post": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "CreateInspection",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInspectionCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
             "description": ""
           }
         }
@@ -1111,6 +1141,67 @@
             "format": "date"
           },
           "apiaryId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "InspectionModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "inspectionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "colonyStrength": {
+            "type": "string"
+          },
+          "framesWithCappedBrood": {
+            "type": "string"
+          },
+          "framesWithUncappedBrood": {
+            "type": "string"
+          },
+          "framesWithHoney": {
+            "type": "string"
+          },
+          "framesWithPollen": {
+            "type": "string"
+          },
+          "framesWithFreeSpace": {
+            "type": "string"
+          },
+          "broodPattern": {
+            "type": "string"
+          },
+          "beeBehaviour": {
+            "type": "string"
+          },
+          "swarmingState": {
+            "type": "string"
+          },
+          "isQueenPresent": {
+            "type": "boolean"
+          },
+          "areEggsPresent": {
+            "type": "boolean"
+          },
+          "areQueenCellsPresent": {
+            "type": "boolean"
+          },
+          "areDroneCellsPresent": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "hiveId": {
             "type": "string",
             "format": "guid"
           }
