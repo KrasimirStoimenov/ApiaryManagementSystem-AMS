@@ -40,8 +40,10 @@ public class Hives : EndpointGroupBase
     {
         if (id != command.Id)
         {
-            //TODO: Refactor to returns more specific error
-            return Results.BadRequest("Ids for url and command not matched.");
+            return Results.Problem(type: "Bad request",
+                title: "Not matched ids",
+                detail: "Ids for url and command not matched.",
+                statusCode: StatusCodes.Status400BadRequest);
         }
 
         await sender.Send(command);

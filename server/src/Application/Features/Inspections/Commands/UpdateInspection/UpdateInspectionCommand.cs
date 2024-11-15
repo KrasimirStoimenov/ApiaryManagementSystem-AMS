@@ -1,14 +1,17 @@
-﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Commands.CreateInspection;
+﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Commands.UpdateInspection;
 
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Features.Inspections.Commands.Models;
 using ApiaryManagementSystem.Domain.Common;
 using ApiaryManagementSystem.Domain.Events.Inspections;
 using ApiaryManagementSystem.Domain.Models.Inspections;
+using Ardalis.GuardClauses;
 using MediatR;
 
-public sealed class CreateInspectionCommand : IRequest<Guid>
+public sealed class UpdateInspectionCommand : IRequest
 {
+    public required Guid Id { get; init; }
+
     public DateTime InspectionDate { get; init; }
 
     public ColonyStrengthRequestEnum ColonyStrength { get; init; }
@@ -42,11 +45,16 @@ public sealed class CreateInspectionCommand : IRequest<Guid>
     public required Guid HiveId { get; init; }
 }
 
-internal sealed class CreateInspectionCommandHandler(IApplicationDbContext dbContext) : IRequestHandler<CreateInspectionCommand, Guid>
+internal sealed class UpdateInspectionCommandHandler(IApplicationDbContext dbContext) : IRequestHandler<UpdateInspectionCommand>
 {
-    public async Task<Guid> Handle(CreateInspectionCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateInspectionCommand request, CancellationToken cancellationToken)
     {
-        var inspection = new Inspection(
+        var inspection = await dbContext.Inspections
+            .FindAsync([request.Id], cancellationToken);
+
+        Guard.Against.NotFound(request.Id, inspection);
+
+        inspection.UpdateInspection(
             request.InspectionDate,
             Enumeration.FromValue<ColonyStrength>((int)request.ColonyStrength),
             Enumeration.FromValue<Frames>((int)request.FramesWithCappedBrood),
@@ -64,12 +72,8 @@ internal sealed class CreateInspectionCommandHandler(IApplicationDbContext dbCon
             request.Notes,
             request.HiveId);
 
-        dbContext.Inspections.Add(inspection);
-
-        inspection.AddDomainEvent(new InspectionCreatedEvent());
+        inspection.AddDomainEvent(new InspectionUpdatedEvent());
 
         await dbContext.SaveChangesAsync(cancellationToken);
-
-        return inspection.Id;
     }
 }

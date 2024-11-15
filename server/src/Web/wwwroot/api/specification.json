@@ -160,7 +160,14 @@
             "description": ""
           },
           "400": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -352,7 +359,14 @@
             "description": ""
           },
           "400": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -416,6 +430,51 @@
       }
     },
     "/api/Inspections/{id}": {
+      "put": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "UpdateInspection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInspectionCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Inspections"
@@ -889,6 +948,35 @@
           }
         }
       },
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "UpdateApiaryCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -1175,6 +1263,67 @@
           3
         ]
       },
+      "UpdateInspectionCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "inspectionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "colonyStrength": {
+            "$ref": "#/components/schemas/ColonyStrengthRequestEnum"
+          },
+          "framesWithCappedBrood": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithUncappedBrood": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithHoney": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithPollen": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "framesWithFreeSpace": {
+            "$ref": "#/components/schemas/FramesRequestEnum"
+          },
+          "broodPattern": {
+            "$ref": "#/components/schemas/BroodPatternRequestEnum"
+          },
+          "beeBehaviour": {
+            "$ref": "#/components/schemas/BeeBehaviourRequestEnum"
+          },
+          "swarmingState": {
+            "$ref": "#/components/schemas/SwarmingStateRequestEnum"
+          },
+          "isQueenPresent": {
+            "type": "boolean"
+          },
+          "areEggsPresent": {
+            "type": "boolean"
+          },
+          "areQueenCellsPresent": {
+            "type": "boolean"
+          },
+          "areDroneCellsPresent": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
       "HttpValidationProblemDetails": {
         "allOf": [
           {
@@ -1198,35 +1347,6 @@
             }
           }
         ]
-      },
-      "ProblemDetails": {
-        "type": "object",
-        "additionalProperties": {
-          "nullable": true
-        },
-        "properties": {
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "nullable": true
-          },
-          "instance": {
-            "type": "string",
-            "nullable": true
-          }
-        }
       },
       "RegisterRequest": {
         "type": "object",

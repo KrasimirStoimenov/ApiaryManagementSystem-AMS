@@ -1,4 +1,4 @@
-﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Commands.CreateInspection.Models;
+﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Commands.Models;
 
 public enum ColonyStrengthRequestEnum
 {

@@ -1,10 +1,10 @@
-﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Commands.CreateInspection;
+﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Commands.UpdateInspection;
 
 using FluentValidation;
 
-public class CreateInspectionCommandValidator : AbstractValidator<CreateInspectionCommand>
+public class UpdateInspectionCommandValidator : AbstractValidator<UpdateInspectionCommand>
 {
-    public CreateInspectionCommandValidator()
+    public UpdateInspectionCommandValidator()
     {
         RuleFor(x => x.InspectionDate)
             .NotEmpty();

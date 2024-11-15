@@ -33,7 +33,7 @@ public static class IEndpointRouteBuilderExtensions
         builder.MapPut(pattern, handler)
             .WithName(handler.Method.Name)
             .Produces(StatusCodes.Status204NoContent)
-            .Produces(StatusCodes.Status400BadRequest);
+            .ProducesProblem(StatusCodes.Status400BadRequest);
 
         return builder;
     }
