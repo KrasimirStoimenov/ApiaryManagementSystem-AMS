@@ -1,7 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Commands.CreateInspection;
 
 using FluentValidation;
-using static Domain.Constants.Models.Inspection;
 
 public class CreateInspectionCommandValidator : AbstractValidator<CreateInspectionCommand>
 {
@@ -10,37 +9,32 @@ public class CreateInspectionCommandValidator : AbstractValidator<CreateInspecti
         RuleFor(x => x.InspectionDate)
             .NotEmpty();
 
+        RuleFor(x => x.ColonyStrength)
+            .IsInEnum();
+
         RuleFor(x => x.FramesWithCappedBrood)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.FramesWithUncappedBrood)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.FramesWithHoney)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.FramesWithPollen)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.FramesWithFreeSpace)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.BroodPattern)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.BeeBehaviour)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.SwarmingState)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(x => x.IsQueenPresent)
             .NotEmpty();
@@ -52,10 +46,6 @@ public class CreateInspectionCommandValidator : AbstractValidator<CreateInspecti
             .NotEmpty();
 
         RuleFor(x => x.AreDroneCellsPresent)
-            .NotEmpty();
-
-        RuleFor(x => x.Notes)
-            .MaximumLength(NotesMaxLength)
             .NotEmpty();
 
         RuleFor(x => x.HiveId)

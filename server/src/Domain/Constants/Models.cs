@@ -4,8 +4,9 @@ public sealed class Models
 {
     public class Common
     {
+        public const int Zero = 0;
         public const int NameMinLength = 2;
-        public const int NameMaxLength = 20;
+        public const int NameMaxLength = 50;
         public const int EnumerationNameMaxLength = 100;
     }
 
@@ -23,10 +24,5 @@ public sealed class Models
         public const int StatusMinLength = 3;
         public const int StatusMaxLength = 30;
         public const int ColorMaxLength = 30;
-    }
-
-    public class Inspection
-    {
-        public const int NotesMaxLength = 500;
     }
 }

@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using static Domain.Constants.Models.Common;
-using static Domain.Constants.Models.Inspection;
 
 internal sealed class InspectionConfiguration : IEntityTypeConfiguration<Inspection>
 {
@@ -90,7 +89,6 @@ internal sealed class InspectionConfiguration : IEntityTypeConfiguration<Inspect
             .IsRequired();
 
         builder.Property(x => x.Notes)
-            .HasMaxLength(NotesMaxLength)
             .IsRequired(false);
     }
 }

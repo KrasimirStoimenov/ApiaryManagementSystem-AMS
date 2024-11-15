@@ -1012,31 +1012,31 @@
             "format": "date-time"
           },
           "colonyStrength": {
-            "$ref": "#/components/schemas/ColonyStrength"
+            "$ref": "#/components/schemas/ColonyStrengthRequestEnum"
           },
           "framesWithCappedBrood": {
-            "$ref": "#/components/schemas/Frames"
+            "$ref": "#/components/schemas/FramesRequestEnum"
           },
           "framesWithUncappedBrood": {
-            "$ref": "#/components/schemas/Frames"
+            "$ref": "#/components/schemas/FramesRequestEnum"
           },
           "framesWithHoney": {
-            "$ref": "#/components/schemas/Frames"
+            "$ref": "#/components/schemas/FramesRequestEnum"
           },
           "framesWithPollen": {
-            "$ref": "#/components/schemas/Frames"
+            "$ref": "#/components/schemas/FramesRequestEnum"
           },
           "framesWithFreeSpace": {
-            "$ref": "#/components/schemas/Frames"
+            "$ref": "#/components/schemas/FramesRequestEnum"
           },
           "broodPattern": {
-            "$ref": "#/components/schemas/BroodPattern"
+            "$ref": "#/components/schemas/BroodPatternRequestEnum"
           },
           "beeBehaviour": {
-            "$ref": "#/components/schemas/BeeBehaviour"
+            "$ref": "#/components/schemas/BeeBehaviourRequestEnum"
           },
           "swarmingState": {
-            "$ref": "#/components/schemas/SwarmingState"
+            "$ref": "#/components/schemas/SwarmingStateRequestEnum"
           },
           "isQueenPresent": {
             "type": "boolean"
@@ -1060,73 +1060,94 @@
           }
         }
       },
-      "ColonyStrength": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Enumeration"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
+      "ColonyStrengthRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Queenless",
+          "Collapsing",
+          "Nucleus",
+          "Weak",
+          "Moderate",
+          "Strong"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
         ]
       },
-      "Enumeration": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "Frames": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Enumeration"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
+      "FramesRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "None",
+          "One",
+          "Few",
+          "Several",
+          "Many",
+          "All"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
         ]
       },
-      "BroodPattern": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Enumeration"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
+      "BroodPatternRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Solid",
+          "Spotty",
+          "Rainbow",
+          "Drone",
+          "Checkerboard",
+          "Patchy",
+          "Shotgun"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
         ]
       },
-      "BeeBehaviour": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Enumeration"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
+      "BeeBehaviourRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "Calm",
+          "Aggressive"
+        ],
+        "enum": [
+          0,
+          1
         ]
       },
-      "SwarmingState": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Enumeration"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
+      "SwarmingStateRequestEnum": {
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "PreSwarming",
+          "SwarmingPreparation",
+          "PrimarySwarm",
+          "PostSwarm"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
         ]
       },
       "HttpValidationProblemDetails": {
