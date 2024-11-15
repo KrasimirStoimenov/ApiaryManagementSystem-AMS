@@ -415,6 +415,31 @@
         }
       }
     },
+    "/api/Inspections/{id}": {
+      "delete": {
+        "tags": [
+          "Inspections"
+        ],
+        "operationId": "DeleteInspection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/Users/register": {
       "post": {
         "tags": [

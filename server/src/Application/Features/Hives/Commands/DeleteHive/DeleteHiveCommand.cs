@@ -1,7 +1,7 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Hives.Commands.DeleteHive;
 
 using ApiaryManagementSystem.Application.Common.Interfaces;
-using ApiaryManagementSystem.Domain.Events.Apiaries;
+using ApiaryManagementSystem.Domain.Events.Hives;
 using Ardalis.GuardClauses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +23,7 @@ internal sealed class DeleteHiveCommandHandler(IApplicationDbContext dbContext) 
 
         dbContext.Hives.Remove(hive);
 
-        hive.AddDomainEvent(new ApiaryDeletedEvent());
+        hive.AddDomainEvent(new HiveDeletedEvent());
 
         await dbContext.SaveChangesAsync(cancellationToken);
     }
