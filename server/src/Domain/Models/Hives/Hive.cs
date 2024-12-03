@@ -2,6 +2,7 @@
 
 using ApiaryManagementSystem.Domain.Common;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
+using ApiaryManagementSystem.Domain.Models.BeeQueens;
 using ApiaryManagementSystem.Domain.Models.Inspections;
 
 public sealed class Hive(
@@ -25,6 +26,8 @@ public sealed class Hive(
     public Guid ApiaryId { get; private set; } = apiaryId;
 
     public Apiary Apiary { get; init; } = null!;    // Required reference navigation to principal
+
+    public IReadOnlyCollection<BeeQueen> BeeQueens { get; init; } = [];
 
     public IReadOnlyCollection<Inspection> Inspections { get; init; } = [];
 

@@ -130,7 +130,7 @@ csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 csharp_style_unused_value_expression_statement_preference = discard_variable:silent
 
 # 'using' directive preferences
-csharp_using_directive_placement = outside_namespace:silent
+csharp_using_directive_placement = inside_namespace:silent
 
 #### C# Formatting Rules ####
 
@@ -196,6 +196,7 @@ csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimenta
 csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental = true:silent
 csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true:silent
 csharp_style_prefer_extended_property_pattern = true:suggestion
+csharp_prefer_system_threading_lock = true:suggestion
 
 #### Naming styles ####
 [*.{cs,vb}]
