@@ -30,7 +30,7 @@ public static class InfrastructureConfiguration
 
             options.UseSqlServer(connectionString);
 
-            options.ConfigureWarnings(warnings => warnings.Log(RelationalEventId.PendingModelChangesWarning));
+            options.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
