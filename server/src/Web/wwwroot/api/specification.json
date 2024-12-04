@@ -1,5 +1,5 @@
 {
-  "x-generator": "NSwag v14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))",
+  "x-generator": "NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))",
   "openapi": "3.0.0",
   "info": {
     "title": "ApiaryManagementSystem API",
@@ -79,6 +79,12 @@
           "x-position": 1
         },
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
           "201": {
             "description": ""
           }
@@ -156,6 +162,12 @@
           "x-position": 2
         },
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
           "204": {
             "description": ""
           },
@@ -195,6 +207,220 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/BeeQueens": {
+      "get": {
+        "tags": [
+          "BeeQueens"
+        ],
+        "operationId": "GetBeeQueens",
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedListOfBeeQueenModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "BeeQueens"
+        ],
+        "operationId": "CreateBeeQueen",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBeeQueenCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/BeeQueens/{id}": {
+      "get": {
+        "tags": [
+          "BeeQueens"
+        ],
+        "operationId": "GetBeeQueenById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BeeQueenModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "BeeQueens"
+        ],
+        "operationId": "UpdateBeeQueen",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBeeQueenCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "BeeQueens"
+        ],
+        "operationId": "DeleteBeeQueen",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "204": {
             "description": ""
           }
         },
@@ -278,6 +504,12 @@
           "x-position": 1
         },
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
           "201": {
             "description": ""
           }
@@ -355,6 +587,12 @@
           "x-position": 2
         },
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
           "204": {
             "description": ""
           },
@@ -394,6 +632,12 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "204": {
             "description": ""
           }
         },
@@ -468,6 +712,12 @@
           "x-position": 1
         },
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
           "201": {
             "description": ""
           }
@@ -545,6 +795,12 @@
           "x-position": 2
         },
         "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
           "204": {
             "description": ""
           },
@@ -584,6 +840,12 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "204": {
             "description": ""
           }
         },
@@ -609,6 +871,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -663,6 +926,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -694,6 +958,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -720,6 +985,7 @@
           {
             "name": "userId",
             "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "nullable": true
@@ -729,6 +995,7 @@
           {
             "name": "code",
             "in": "query",
+            "required": true,
             "schema": {
               "type": "string",
               "nullable": true
@@ -767,6 +1034,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -791,6 +1059,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -825,6 +1094,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -859,6 +1129,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -944,6 +1215,7 @@
               }
             }
           },
+          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -1085,6 +1357,111 @@
           },
           "location": {
             "type": "string"
+          }
+        }
+      },
+      "PaginatedListOfBeeQueenModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BeeQueenModel"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BeeQueenModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "colorMark": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAlive": {
+            "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "CreateBeeQueenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "colorMark": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAlive": {
+            "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "UpdateBeeQueenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "colorMark": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAlive": {
+            "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
           }
         }
       },

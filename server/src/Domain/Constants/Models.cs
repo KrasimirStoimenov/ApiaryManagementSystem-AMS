@@ -25,4 +25,9 @@ public sealed class Models
         public const int StatusMaxLength = 30;
         public const int ColorMaxLength = 30;
     }
+
+    public class BeeQueen
+    {
+        public const int ColorMarkMaxLength = 30;
+    }
 }

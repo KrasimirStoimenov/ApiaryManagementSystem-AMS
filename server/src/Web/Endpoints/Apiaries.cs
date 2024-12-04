@@ -54,6 +54,7 @@ public class Apiaries : EndpointGroupBase
     public async Task<IResult> DeleteApiary(ISender sender, Guid id)
     {
         await sender.Send(new DeleteApiaryCommand() { Id = id });
-        return Results.Ok();
+
+        return Results.NoContent();
     }
 }

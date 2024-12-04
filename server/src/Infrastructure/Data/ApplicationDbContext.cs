@@ -4,6 +4,7 @@ using System.Reflection;
 
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
+using ApiaryManagementSystem.Domain.Models.BeeQueens;
 using ApiaryManagementSystem.Domain.Models.Hives;
 using ApiaryManagementSystem.Domain.Models.Inspections;
 using ApiaryManagementSystem.Infrastructure.Identity;
@@ -15,6 +16,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Apiary> Apiaries => Set<Apiary>();
 
     public DbSet<Hive> Hives => Set<Hive>();
+
+    public DbSet<BeeQueen> BeeQueens => Set<BeeQueen>();
 
     public DbSet<Inspection> Inspections => Set<Inspection>();
 

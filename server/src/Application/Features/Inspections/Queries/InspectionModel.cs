@@ -1,4 +1,4 @@
-﻿namespace ApiaryManagementSystem.Application.Features.Inspections;
+﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Queries;
 
 public sealed record InspectionModel(
     Guid Id,

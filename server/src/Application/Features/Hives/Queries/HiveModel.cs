@@ -1,4 +1,4 @@
-﻿namespace ApiaryManagementSystem.Application.Features.Hives;
+﻿namespace ApiaryManagementSystem.Application.Features.Hives.Queries;
 
 public sealed record HiveModel(
     Guid Id,

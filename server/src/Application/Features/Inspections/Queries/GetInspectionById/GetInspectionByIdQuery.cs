@@ -1,6 +1,7 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Queries.GetInspectionById;
 
 using ApiaryManagementSystem.Application.Common.Interfaces;
+using ApiaryManagementSystem.Application.Features.Inspections.Queries;
 using Ardalis.GuardClauses;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;

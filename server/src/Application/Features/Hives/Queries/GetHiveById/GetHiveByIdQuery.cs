@@ -1,6 +1,7 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Hives.Queries.GetHiveById;
 
 using ApiaryManagementSystem.Application.Common.Interfaces;
+using ApiaryManagementSystem.Application.Features.Hives.Queries;
 using Ardalis.GuardClauses;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
