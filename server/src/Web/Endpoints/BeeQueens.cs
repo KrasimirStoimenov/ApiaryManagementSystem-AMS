@@ -1,8 +1,10 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
 
+using ApiaryManagementSystem.Application.Common.Models;
 using ApiaryManagementSystem.Application.Features.BeeQueens.Commands.CreateBeeQueen;
 using ApiaryManagementSystem.Application.Features.BeeQueens.Queries;
 using ApiaryManagementSystem.Application.Features.BeeQueens.Queries.GetBeeQueenById;
+using ApiaryManagementSystem.Application.Features.BeeQueens.Queries.GetBeeQueens;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,12 +15,16 @@ public class BeeQueens : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
+            .MapGet(GetBeeQueens)
             .MapGet(GetBeeQueenById, "{id}")
             .MapPost(CreateBeeQueen);
     }
 
+    public async Task<PaginatedList<BeeQueenModel>> GetBeeQueens(ISender sender, [AsParameters] GetBeeQueensQuery query)
+        => await sender.Send(query);
+
     public async Task<BeeQueenModel> GetBeeQueenById(ISender sender, Guid id)
-        => await sender.Send(new GetBeeQueenByIdCommand() { BeeQueenId = id });
+        => await sender.Send(new GetBeeQueenByIdQuery() { BeeQueenId = id });
 
     public async Task<IResult> CreateBeeQueen(ISender sender, CreateBeeQueenCommand command)
     {

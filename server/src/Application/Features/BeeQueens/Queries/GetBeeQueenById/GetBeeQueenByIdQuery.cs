@@ -9,16 +9,16 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-public sealed class GetBeeQueenByIdCommand : IRequest<BeeQueenModel>
+public sealed class GetBeeQueenByIdQuery : IRequest<BeeQueenModel>
 {
     public Guid BeeQueenId { get; init; }
 }
 
-internal sealed class GetBeeQueenByIdCommandHandler(
+internal sealed class GetBeeQueenByIdQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetBeeQueenByIdCommand, BeeQueenModel>
+    IMapper mapper) : IRequestHandler<GetBeeQueenByIdQuery, BeeQueenModel>
 {
-    public async Task<BeeQueenModel> Handle(GetBeeQueenByIdCommand request, CancellationToken cancellationToken)
+    public async Task<BeeQueenModel> Handle(GetBeeQueenByIdQuery request, CancellationToken cancellationToken)
     {
         var beeQueen = await dbContext.BeeQueens
             .Where(x => x.Id == request.BeeQueenId)
