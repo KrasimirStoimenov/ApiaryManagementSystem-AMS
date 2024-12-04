@@ -2,6 +2,7 @@
 
 using ApiaryManagementSystem.Application.Common.Models;
 using ApiaryManagementSystem.Application.Features.BeeQueens.Commands.CreateBeeQueen;
+using ApiaryManagementSystem.Application.Features.BeeQueens.Commands.DeleteBeeQueen;
 using ApiaryManagementSystem.Application.Features.BeeQueens.Queries;
 using ApiaryManagementSystem.Application.Features.BeeQueens.Queries.GetBeeQueenById;
 using ApiaryManagementSystem.Application.Features.BeeQueens.Queries.GetBeeQueens;
@@ -17,7 +18,8 @@ public class BeeQueens : EndpointGroupBase
             .RequireAuthorization()
             .MapGet(GetBeeQueens)
             .MapGet(GetBeeQueenById, "{id}")
-            .MapPost(CreateBeeQueen);
+            .MapPost(CreateBeeQueen)
+            .MapDelete(DeleteBeeQueen, "{id}");
     }
 
     public async Task<PaginatedList<BeeQueenModel>> GetBeeQueens(ISender sender, [AsParameters] GetBeeQueensQuery query)
@@ -31,5 +33,12 @@ public class BeeQueens : EndpointGroupBase
         var beeQueenId = await sender.Send(command);
 
         return Results.CreatedAtRoute(nameof(GetBeeQueenById), new { id = beeQueenId }, beeQueenId);
+    }
+
+    public async Task<IResult> DeleteBeeQueen(ISender sender, Guid id)
+    {
+        await sender.Send(new DeleteBeeQueenCommand() { BeeQueenId = id });
+
+        return Results.NoContent();
     }
 }

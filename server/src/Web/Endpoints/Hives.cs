@@ -55,6 +55,6 @@ public class Hives : EndpointGroupBase
     {
         await sender.Send(new DeleteHiveCommand() { Id = id });
 
-        return Results.Ok();
+        return Results.NoContent();
     }
 }

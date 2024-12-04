@@ -54,6 +54,6 @@ public class Inspections : EndpointGroupBase
     {
         await sender.Send(new DeleteInspectionCommand() { Id = id });
 
-        return Results.Ok();
+        return Results.NoContent();
     }
 }
