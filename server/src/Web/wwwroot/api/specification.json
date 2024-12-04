@@ -217,6 +217,42 @@
         ]
       }
     },
+    "/api/BeeQueens": {
+      "post": {
+        "tags": [
+          "BeeQueens"
+        ],
+        "operationId": "CreateBeeQueen",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBeeQueenCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Hives": {
       "get": {
         "tags": [
@@ -1131,6 +1167,27 @@
           },
           "location": {
             "type": "string"
+          }
+        }
+      },
+      "CreateBeeQueenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "colorMark": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAlive": {
+            "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
           }
         }
       },
