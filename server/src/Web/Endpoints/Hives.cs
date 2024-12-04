@@ -1,10 +1,10 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
 
 using ApiaryManagementSystem.Application.Common.Models;
-using ApiaryManagementSystem.Application.Features.Hives;
 using ApiaryManagementSystem.Application.Features.Hives.Commands.CreateHive;
 using ApiaryManagementSystem.Application.Features.Hives.Commands.DeleteHive;
 using ApiaryManagementSystem.Application.Features.Hives.Commands.UpdateHive;
+using ApiaryManagementSystem.Application.Features.Hives.Queries;
 using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHiveById;
 using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHives;
 using ApiaryManagementSystem.Web.Infrastructure;

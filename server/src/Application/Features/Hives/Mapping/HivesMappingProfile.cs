@@ -1,5 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Hives.Mapping;
 
+using ApiaryManagementSystem.Application.Features.Hives.Queries;
 using ApiaryManagementSystem.Domain.Models.Hives;
 using AutoMapper;
 

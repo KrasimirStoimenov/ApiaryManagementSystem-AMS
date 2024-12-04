@@ -1,5 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Mapping;
 
+using ApiaryManagementSystem.Application.Features.Inspections.Queries;
 using ApiaryManagementSystem.Domain.Models.Inspections;
 using AutoMapper;
 

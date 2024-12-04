@@ -1,9 +1,9 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
 using ApiaryManagementSystem.Application.Common.Models;
-using ApiaryManagementSystem.Application.Features.Inspections;
 using ApiaryManagementSystem.Application.Features.Inspections.Commands.CreateInspection;
 using ApiaryManagementSystem.Application.Features.Inspections.Commands.DeleteInspection;
 using ApiaryManagementSystem.Application.Features.Inspections.Commands.UpdateInspection;
+using ApiaryManagementSystem.Application.Features.Inspections.Queries;
 using ApiaryManagementSystem.Application.Features.Inspections.Queries.GetInspectionById;
 using ApiaryManagementSystem.Application.Features.Inspections.Queries.GetInspections;
 using ApiaryManagementSystem.Web.Infrastructure;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Mappings;
 using ApiaryManagementSystem.Application.Common.Models;
+using ApiaryManagementSystem.Application.Features.Hives.Queries;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
