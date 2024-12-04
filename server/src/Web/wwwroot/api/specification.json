@@ -340,6 +340,62 @@
           }
         ]
       },
+      "put": {
+        "tags": [
+          "BeeQueens"
+        ],
+        "operationId": "UpdateBeeQueen",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBeeQueenCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "204": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
       "delete": {
         "tags": [
           "BeeQueens"
@@ -1367,6 +1423,31 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "colorMark": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAlive": {
+            "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "UpdateBeeQueenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
           "year": {
             "type": "integer",
             "format": "int32"
