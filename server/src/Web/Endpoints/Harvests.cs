@@ -1,6 +1,7 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
 
 using ApiaryManagementSystem.Application.Features.Harvests.Commands.CreateHarvest;
+using ApiaryManagementSystem.Application.Features.Harvests.Commands.DeleteHarvest;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +12,8 @@ public class Harvests : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapPost(CreateHarvest);
+            .MapPost(CreateHarvest)
+            .MapDelete(DeleteHarvest, "{id}");
     }
 
     public async Task<IResult> CreateHarvest(ISender sender, CreateHarvestCommand command)
@@ -20,5 +22,12 @@ public class Harvests : EndpointGroupBase
 
         return Results.Ok(harvestId);
         //return Results.CreatedAtRoute("TBC", new { id = harvestId }, harvestId);
+    }
+
+    public async Task<IResult> DeleteHarvest(ISender sender, Guid id)
+    {
+        await sender.Send(new DeleteHarvestCommand() { HarvestId = id });
+
+        return Results.NoContent();
     }
 }
