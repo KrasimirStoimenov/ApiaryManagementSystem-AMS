@@ -2,6 +2,7 @@
 
 using ApiaryManagementSystem.Domain.Models.Apiaries;
 using ApiaryManagementSystem.Domain.Models.BeeQueens;
+using ApiaryManagementSystem.Domain.Models.Harvests;
 using ApiaryManagementSystem.Domain.Models.Hives;
 using ApiaryManagementSystem.Domain.Models.Inspections;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,8 @@ public interface IApplicationDbContext
     DbSet<BeeQueen> BeeQueens { get; }
 
     DbSet<Inspection> Inspections { get; }
+
+    DbSet<Harvest> Harvests { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
