@@ -35,6 +35,7 @@ public sealed class Models
 
     public class Harvest
     {
+        public const int HarvestedProductMinLength = 1;
         public const int HarvestedProductMaxLength = 30;
         public const int AmountMaxValue = 100000;
     }

@@ -431,6 +431,42 @@
         ]
       }
     },
+    "/api/Harvests": {
+      "post": {
+        "tags": [
+          "Harvests"
+        ],
+        "operationId": "CreateHarvest",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHarvestCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Hives": {
       "get": {
         "tags": [
@@ -1458,6 +1494,27 @@
           },
           "isAlive": {
             "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "CreateHarvestCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "product": {
+            "type": "string"
           },
           "hiveId": {
             "type": "string",
