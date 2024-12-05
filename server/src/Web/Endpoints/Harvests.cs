@@ -2,6 +2,7 @@
 
 using ApiaryManagementSystem.Application.Features.Harvests.Commands.CreateHarvest;
 using ApiaryManagementSystem.Application.Features.Harvests.Commands.DeleteHarvest;
+using ApiaryManagementSystem.Application.Features.Harvests.Commands.UpdateHarvest;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ public class Harvests : EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapPost(CreateHarvest)
+            .MapPut(UpdateHarvest, "{id}")
             .MapDelete(DeleteHarvest, "{id}");
     }
 
@@ -22,6 +24,22 @@ public class Harvests : EndpointGroupBase
 
         return Results.Ok(harvestId);
         //return Results.CreatedAtRoute("TBC", new { id = harvestId }, harvestId);
+    }
+
+    public async Task<IResult> UpdateHarvest(ISender sender, Guid id, UpdateHarvestCommand command)
+    {
+        if (id != command.Id)
+        {
+            return Results.Problem(
+                type: "Bad request",
+                title: "Not matched ids",
+                detail: "Ids for url and command not matched.",
+                statusCode: StatusCodes.Status400BadRequest);
+        }
+
+        await sender.Send(command);
+
+        return Results.NoContent();
     }
 
     public async Task<IResult> DeleteHarvest(ISender sender, Guid id)
