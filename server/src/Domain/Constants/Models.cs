@@ -29,5 +29,13 @@ public sealed class Models
     public class BeeQueen
     {
         public const int ColorMarkMaxLength = 30;
+        public const int YearMinValue = 1900;
+        public const int YearMaxValue = 9999;
+    }
+
+    public class Harvest
+    {
+        public const int HarvestedProductMaxLength = 30;
+        public const int AmountMaxValue = 100000;
     }
 }
