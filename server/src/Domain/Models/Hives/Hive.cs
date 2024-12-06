@@ -3,6 +3,7 @@
 using ApiaryManagementSystem.Domain.Common;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
 using ApiaryManagementSystem.Domain.Models.BeeQueens;
+using ApiaryManagementSystem.Domain.Models.Harvests;
 using ApiaryManagementSystem.Domain.Models.Inspections;
 
 public sealed class Hive(
@@ -30,6 +31,8 @@ public sealed class Hive(
     public IReadOnlyCollection<BeeQueen> BeeQueens { get; init; } = [];
 
     public IReadOnlyCollection<Inspection> Inspections { get; init; } = [];
+
+    public IReadOnlyCollection<Harvest> Harvests { get; init; } = [];
 
     public void UpdateHive(
         string number,

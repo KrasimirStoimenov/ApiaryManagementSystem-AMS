@@ -9,8 +9,8 @@ public class UpdateBeeQueenCommandValidator : AbstractValidator<UpdateBeeQueenCo
     public UpdateBeeQueenCommandValidator()
     {
         RuleFor(x => x.Year)
-            .GreaterThanOrEqualTo(1900)
-            .LessThanOrEqualTo(9999)
+            .GreaterThanOrEqualTo(YearMinValue)
+            .LessThanOrEqualTo(YearMaxValue)
             .NotEmpty();
 
         RuleFor(x => x.ColorMark)
