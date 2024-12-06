@@ -431,33 +431,34 @@
         ]
       }
     },
-    "/api/Harvests": {
-      "post": {
+    "/api/Harvests/{id}": {
+      "get": {
         "tags": [
           "Harvests"
         ],
-        "operationId": "CreateHarvest",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateHarvestCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
+        "operationId": "GetHarvestById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HarvestModel"
+                }
+              }
             }
-          },
-          "201": {
-            "description": ""
           }
         },
         "security": [
@@ -465,9 +466,7 @@
             "JWT": []
           }
         ]
-      }
-    },
-    "/api/Harvests/{id}": {
+      },
       "put": {
         "tags": [
           "Harvests"
@@ -549,6 +548,42 @@
             }
           },
           "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Harvests": {
+      "post": {
+        "tags": [
+          "Harvests"
+        ],
+        "operationId": "CreateHarvest",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHarvestCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "201": {
             "description": ""
           }
         },
@@ -1586,6 +1621,31 @@
           },
           "isAlive": {
             "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "HarvestModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "product": {
+            "type": "string"
           },
           "hiveId": {
             "type": "string",

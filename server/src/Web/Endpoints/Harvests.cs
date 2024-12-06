@@ -3,6 +3,8 @@
 using ApiaryManagementSystem.Application.Features.Harvests.Commands.CreateHarvest;
 using ApiaryManagementSystem.Application.Features.Harvests.Commands.DeleteHarvest;
 using ApiaryManagementSystem.Application.Features.Harvests.Commands.UpdateHarvest;
+using ApiaryManagementSystem.Application.Features.Harvests.Queries;
+using ApiaryManagementSystem.Application.Features.Harvests.Queries.GetHarvestById;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,17 +15,20 @@ public class Harvests : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
+            .MapGet(GetHarvestById, "{id}")
             .MapPost(CreateHarvest)
             .MapPut(UpdateHarvest, "{id}")
             .MapDelete(DeleteHarvest, "{id}");
     }
 
+    public async Task<HarvestModel> GetHarvestById(ISender sender, Guid id)
+        => await sender.Send(new GetHarvestByIdQuery() { HarvestId = id });
+
     public async Task<IResult> CreateHarvest(ISender sender, CreateHarvestCommand command)
     {
         var harvestId = await sender.Send(command);
 
-        return Results.Ok(harvestId);
-        //return Results.CreatedAtRoute("TBC", new { id = harvestId }, harvestId);
+        return Results.CreatedAtRoute(nameof(GetHarvestById), new { id = harvestId }, harvestId);
     }
 
     public async Task<IResult> UpdateHarvest(ISender sender, Guid id, UpdateHarvestCommand command)
