@@ -1,10 +1,12 @@
 ﻿namespace ApiaryManagementSystem.Web.Endpoints;
 
+using ApiaryManagementSystem.Application.Common.Models;
 using ApiaryManagementSystem.Application.Features.Diseases.Commands.CreateDisease;
 using ApiaryManagementSystem.Application.Features.Diseases.Commands.DeleteDisease;
 using ApiaryManagementSystem.Application.Features.Diseases.Commands.UpdateDisease;
 using ApiaryManagementSystem.Application.Features.Diseases.Queries;
 using ApiaryManagementSystem.Application.Features.Diseases.Queries.GetDiseaseById;
+using ApiaryManagementSystem.Application.Features.Diseases.Queries.GetDiseases;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -15,11 +17,15 @@ public sealed class Diseases : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
+            .MapGet(GetDiseases)
             .MapGet(GetDiseaseById, "{id}")
             .MapPost(CreateDisease)
             .MapPut(UpdateDisease, "{id}")
             .MapDelete(DeleteDisease, "{id}");
     }
+
+    public async Task<PaginatedList<DiseaseModel>> GetDiseases(ISender sender, [AsParameters] GetDiseasesQuery query)
+        => await sender.Send(query);
 
     public async Task<DiseaseModel> GetDiseaseById(ISender sender, Guid id)
         => await sender.Send(new GetDiseaseByIdQuery() { DiseaseId = id });
