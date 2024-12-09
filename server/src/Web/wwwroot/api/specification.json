@@ -431,33 +431,34 @@
         ]
       }
     },
-    "/api/Diseases": {
-      "post": {
+    "/api/Diseases/{id}": {
+      "get": {
         "tags": [
           "Diseases"
         ],
-        "operationId": "CreateDisease",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateDiseaseCommand"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
+        "operationId": "GetDiseaseById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiseaseModel"
+                }
+              }
             }
-          },
-          "201": {
-            "description": ""
           }
         },
         "security": [
@@ -465,9 +466,7 @@
             "JWT": []
           }
         ]
-      }
-    },
-    "/api/Diseases/{id}": {
+      },
       "put": {
         "tags": [
           "Diseases"
@@ -549,6 +548,42 @@
             }
           },
           "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/Diseases": {
+      "post": {
+        "tags": [
+          "Diseases"
+        ],
+        "operationId": "CreateDisease",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDiseaseCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "201": {
             "description": ""
           }
         },
@@ -1794,6 +1829,30 @@
           },
           "isAlive": {
             "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "DiseaseModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "treatment": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
           },
           "hiveId": {
             "type": "string",

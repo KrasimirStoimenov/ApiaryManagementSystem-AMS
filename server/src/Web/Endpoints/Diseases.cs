@@ -3,6 +3,8 @@
 using ApiaryManagementSystem.Application.Features.Diseases.Commands.CreateDisease;
 using ApiaryManagementSystem.Application.Features.Diseases.Commands.DeleteDisease;
 using ApiaryManagementSystem.Application.Features.Diseases.Commands.UpdateDisease;
+using ApiaryManagementSystem.Application.Features.Diseases.Queries;
+using ApiaryManagementSystem.Application.Features.Diseases.Queries.GetDiseaseById;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,10 +15,14 @@ public sealed class Diseases : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
+            .MapGet(GetDiseaseById, "{id}")
             .MapPost(CreateDisease)
             .MapPut(UpdateDisease, "{id}")
             .MapDelete(DeleteDisease, "{id}");
     }
+
+    public async Task<DiseaseModel> GetDiseaseById(ISender sender, Guid id)
+        => await sender.Send(new GetDiseaseByIdQuery() { DiseaseId = id });
 
     public async Task<IResult> CreateDisease(ISender sender, CreateDiseaseCommand command)
     {
