@@ -18,4 +18,16 @@ public sealed class Disease(
     public Guid HiveId { get; private set; } = hiveId;
 
     public Hive Hive { get; init; } = null!;    // Required reference navigation to principal
+
+    public void UpdateDisease(
+        string name,
+        string treatment,
+        string? description,
+        Guid hiveId)
+    {
+        this.Name = name;
+        this.Treatment = treatment;
+        this.Description = description;
+        this.HiveId = hiveId;
+    }
 }

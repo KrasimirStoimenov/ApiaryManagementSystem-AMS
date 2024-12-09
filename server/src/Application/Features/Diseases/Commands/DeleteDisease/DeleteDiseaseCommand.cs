@@ -3,6 +3,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
+using ApiaryManagementSystem.Domain.Events.Diseases;
 using Ardalis.GuardClauses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,8 @@ internal sealed class DeleteDiseaseCommandHandler(IApplicationDbContext dbContex
         Guard.Against.NotFound(request.DiseaseId, disease);
 
         dbContext.Diseases.Remove(disease);
+
+        disease.AddDomainEvent(new DiseaseDeletedEvent());
 
         await dbContext.SaveChangesAsync(cancellationToken);
     }
