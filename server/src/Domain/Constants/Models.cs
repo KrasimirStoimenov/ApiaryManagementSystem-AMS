@@ -39,4 +39,10 @@ public sealed class Models
         public const int HarvestedProductMaxLength = 30;
         public const int AmountMaxValue = 100000;
     }
+
+    public class Disease
+    {
+        public const int DescriptionMaxLength = 500;
+        public const int TreatmentMaxLength = 500;
+    }
 }
