@@ -467,6 +467,42 @@
         ]
       }
     },
+    "/api/Diseases/{id}": {
+      "delete": {
+        "tags": [
+          "Diseases"
+        ],
+        "operationId": "DeleteDisease",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Harvests": {
       "get": {
         "tags": [
