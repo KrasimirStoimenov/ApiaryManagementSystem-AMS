@@ -431,6 +431,42 @@
         ]
       }
     },
+    "/api/Diseases": {
+      "post": {
+        "tags": [
+          "Diseases"
+        ],
+        "operationId": "CreateDisease",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDiseaseCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Harvests": {
       "get": {
         "tags": [
@@ -1666,6 +1702,26 @@
           },
           "isAlive": {
             "type": "boolean"
+          },
+          "hiveId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "CreateDiseaseCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "treatment": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
           },
           "hiveId": {
             "type": "string",

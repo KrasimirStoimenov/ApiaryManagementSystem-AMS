@@ -42,7 +42,8 @@ public sealed class Models
 
     public class Disease
     {
-        public const int DescriptionMaxLength = 500;
+        public const int TreatmentMinLength = 1;
         public const int TreatmentMaxLength = 500;
+        public const int DescriptionMaxLength = 500;
     }
 }
