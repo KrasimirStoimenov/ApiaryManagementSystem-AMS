@@ -1,13 +1,13 @@
-﻿using ApiaryManagementSystem.Application.Common.Exceptions;
+﻿namespace ApiaryManagementSystem.Application.UnitTests.Common.Exceptions;
+
+using ApiaryManagementSystem.Application.Common.Exceptions;
 using FluentAssertions;
 using FluentValidation.Results;
-using NUnit.Framework;
-
-namespace ApiaryManagementSystem.Application.UnitTests.Common.Exceptions;
+using Xunit;
 
 public class ValidationExceptionTests
 {
-    [Test]
+    [Fact]
     public void DefaultConstructorCreatesAnEmptyErrorDictionary()
     {
         var actual = new ValidationException().Errors;
@@ -15,7 +15,7 @@ public class ValidationExceptionTests
         actual.Keys.Should().BeEquivalentTo([]);
     }
 
-    [Test]
+    [Fact]
     public void SingleValidationFailureCreatesASingleElementErrorDictionary()
     {
         var failures = new List<ValidationFailure>
@@ -29,7 +29,7 @@ public class ValidationExceptionTests
         actual["Age"].Should().BeEquivalentTo(["must be over 18"]);
     }
 
-    [Test]
+    [Fact]
     public void MulitpleValidationFailureForMultiplePropertiesCreatesAMultipleElementErrorDictionaryEachWithMultipleValues()
     {
         var failures = new List<ValidationFailure>

@@ -1,43 +1,42 @@
-﻿using ApiaryManagementSystem.Application.Common.Interfaces;
-using ApiaryManagementSystem.Application.Features.Apiaries.Commands.CreateApiary;
-namespace TestProject.Application.UnitTests.Common.Behaviours;
+﻿namespace ApiaryManagementSystem.Application.UnitTests.Common.Behaviours;
 
 using ApiaryManagementSystem.Application.Common.Behaviours;
+using ApiaryManagementSystem.Application.Common.Interfaces;
+using ApiaryManagementSystem.Application.Features.Apiaries.Commands.CreateApiary;
 using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
+using NSubstitute;
+using Xunit;
 
 public class RequestLoggerTests
 {
-    private Mock<ILogger<CreateApiaryCommand>> _logger = null!;
-    private Mock<IUser> _user = null!;
-    private Mock<IIdentityService> _identityService = null!;
-    private LoggingBehaviour<CreateApiaryCommand> _requestLogger;
+    private readonly ILogger<CreateApiaryCommand> _logger;
+    private readonly IUser _user;
+    private readonly IIdentityService _identityService;
+    private readonly LoggingBehaviour<CreateApiaryCommand> _requestLogger;
 
-    [SetUp]
-    public void Setup()
+    public RequestLoggerTests()
     {
-        _logger = new Mock<ILogger<CreateApiaryCommand>>();
-        _user = new Mock<IUser>();
-        _identityService = new Mock<IIdentityService>();
-        _requestLogger = new LoggingBehaviour<CreateApiaryCommand>(_logger.Object, _user.Object, _identityService.Object);
+        _logger = Substitute.For<ILogger<CreateApiaryCommand>>();
+        _user = Substitute.For<IUser>();
+        _identityService = Substitute.For<IIdentityService>();
+        _requestLogger = new LoggingBehaviour<CreateApiaryCommand>(_logger, _user, _identityService);
     }
 
-    [Test]
+    [Fact]
     public async Task ShouldCallGetUserNameAsyncOnceIfAuthenticated()
     {
-        _user.Setup(x => x.Id).Returns(Guid.NewGuid().ToString());
+        _user.Id.Returns(Guid.NewGuid().ToString());
 
-        await this._requestLogger.Process(new CreateApiaryCommand { Name = "TestName", Location = "TestLocation" }, new CancellationToken());
+        await _requestLogger.Process(new CreateApiaryCommand { Name = "TestName", Location = "TestLocation" }, new CancellationToken());
 
-        _identityService.Verify(i => i.GetUserNameAsync(It.IsAny<string>()), Times.Once);
+        await _identityService.Received().GetUserNameAsync(Arg.Any<string>());
     }
 
-    [Test]
+    [Fact]
     public async Task ShouldNotCallGetUserNameAsyncOnceIfUnauthenticated()
     {
-        await this._requestLogger.Process(new CreateApiaryCommand { Name = "TestName", Location = "TestLocation" }, new CancellationToken());
+        await _requestLogger.Process(new CreateApiaryCommand { Name = "TestName", Location = "TestLocation" }, new CancellationToken());
 
-        _identityService.Verify(i => i.GetUserNameAsync(It.IsAny<string>()), Times.Never);
+        await _identityService.DidNotReceive().GetUserNameAsync(Arg.Any<string>());
     }
 }
