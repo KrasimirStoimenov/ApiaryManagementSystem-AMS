@@ -1,10 +1,9 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿namespace ApiaryManagementSystem.Application.UnitTests.Common.Mappings;
+
+using System.Reflection;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using AutoMapper;
-using NUnit.Framework;
-
-namespace ApiaryManagementSystem.Application.UnitTests.Common.Mappings;
+using Xunit;
 
 public class MappingTests
 {
@@ -19,18 +18,9 @@ public class MappingTests
         _mapper = _configuration.CreateMapper();
     }
 
-    [Test]
+    [Fact]
     public void ShouldHaveValidConfiguration()
     {
         _configuration.AssertConfigurationIsValid();
-    }
-
-    private object GetInstanceOf(Type type)
-    {
-        if (type.GetConstructor(Type.EmptyTypes) != null)
-            return Activator.CreateInstance(type)!;
-
-        // Type without parameterless constructor
-        return RuntimeHelpers.GetUninitializedObject(type);
     }
 }
