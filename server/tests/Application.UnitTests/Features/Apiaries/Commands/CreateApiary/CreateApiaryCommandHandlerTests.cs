@@ -1,26 +1,19 @@
 ﻿namespace ApiaryManagementSystem.Application.UnitTests.Features.Apiaries.Commands.CreateApiary;
 
-using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Features.Apiaries.Commands.CreateApiary;
 using ApiaryManagementSystem.Domain.Events.Apiaries;
 using ApiaryManagementSystem.Domain.Models.Apiaries;
-using Microsoft.EntityFrameworkCore;
 using NSubstitute;
 using Xunit;
 
-public class CreateApiaryCommandHandlerTests
+public class CreateApiaryCommandHandlerTests : ApiaryDbContextMock
 {
-    private readonly IApplicationDbContext dbContext;
-    private readonly DbSet<Apiary> apiariesDbSet;
     private readonly CreateApiaryCommandHandler sut;
     private readonly CreateApiaryCommand command;
 
     public CreateApiaryCommandHandlerTests()
     {
-        this.dbContext = Substitute.For<IApplicationDbContext>();
-        this.apiariesDbSet = Substitute.For<DbSet<Apiary>>();
-
-        this.sut = new CreateApiaryCommandHandler(this.dbContext);
+        this.sut = new CreateApiaryCommandHandler(this.DbContextMock);
 
         this.command = new CreateApiaryCommand
         {
@@ -30,39 +23,37 @@ public class CreateApiaryCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_ShouldExecuteSaveChangesAndCreateApiary()
+    public async Task Handle_ShouldCreateApiary()
     {
         // Arrange
-        this.dbContext.Apiaries
-            .Returns(this.apiariesDbSet);
+        this.DbContextMock.Apiaries
+            .Returns(this.ApiariesDbSetMock);
 
         // Act
         var apiaryId = await this.sut.Handle(this.command, CancellationToken.None);
 
         // Assert
-        this.apiariesDbSet.Received(1).Add(Arg.Is<Apiary>(a =>
+        this.ApiariesDbSetMock.Received(1).Add(Arg.Is<Apiary>(a =>
             a.Name == this.command.Name &&
             a.Location == this.command.Location));
 
-        await this.dbContext.Received(1).SaveChangesAsync(CancellationToken.None);
+        await this.DbContextMock.Received(1).SaveChangesAsync(CancellationToken.None);
     }
 
     [Fact]
     public async Task Handle_ShouldAddDomainEvent()
     {
         // Arrange
-        this.dbContext.Apiaries
-            .Returns(this.apiariesDbSet);
-
-        var handler = new CreateApiaryCommandHandler(this.dbContext);
+        this.DbContextMock.Apiaries
+            .Returns(this.ApiariesDbSetMock);
 
         // Act
-        var result = await handler.Handle(this.command, CancellationToken.None);
+        var result = await this.sut.Handle(this.command, CancellationToken.None);
 
         // Assert
-        this.apiariesDbSet.Received(1).Add(Arg.Is<Apiary>(a =>
+        this.ApiariesDbSetMock.Received(1).Add(Arg.Is<Apiary>(a =>
             a.DomainEvents.Any(e => e is ApiaryCreatedEvent)));
 
-        await this.dbContext.Received(1).SaveChangesAsync(CancellationToken.None);
+        await this.DbContextMock.Received(1).SaveChangesAsync(CancellationToken.None);
     }
 }
