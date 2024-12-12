@@ -7,20 +7,20 @@ using Xunit;
 
 public class MappingTests
 {
-    private readonly IConfigurationProvider _configuration;
-    private readonly IMapper _mapper;
+    private readonly IConfigurationProvider configuration;
+    private readonly IMapper mapper;
 
     public MappingTests()
     {
-        _configuration = new MapperConfiguration(config =>
+        this.configuration = new MapperConfiguration(config =>
             config.AddMaps(Assembly.GetAssembly(typeof(IApplicationDbContext))));
 
-        _mapper = _configuration.CreateMapper();
+        this.mapper = this.configuration.CreateMapper();
     }
 
     [Fact]
     public void ShouldHaveValidConfiguration()
     {
-        _configuration.AssertConfigurationIsValid();
+        this.configuration.AssertConfigurationIsValid();
     }
 }
