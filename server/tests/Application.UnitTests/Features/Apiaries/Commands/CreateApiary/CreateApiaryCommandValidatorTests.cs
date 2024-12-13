@@ -13,6 +13,23 @@ public class CreateApiaryCommandValidatorTests
         this.validator = new CreateApiaryCommandValidator();
     }
 
+    [Fact]
+    public async Task Validate_ShouldPass_WhenAllPropertiesAreValid()
+    {
+        // Arrange
+        var command = new CreateApiaryCommand
+        {
+            Name = "Valid Name",
+            Location = "Valid Location"
+        };
+
+        // Act
+        var result = await this.validator.TestValidateAsync(command);
+
+        // Assert
+        result.ShouldNotHaveAnyValidationErrors();
+    }
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -24,7 +41,7 @@ public class CreateApiaryCommandValidatorTests
         var command = new CreateApiaryCommand()
         {
             Name = name!,
-            Location = "Test location",
+            Location = "Valid Location",
         };
 
         //Act
@@ -43,7 +60,7 @@ public class CreateApiaryCommandValidatorTests
         //Arrange
         var command = new CreateApiaryCommand()
         {
-            Name = "Test name",
+            Name = "Valid Name",
             Location = location!,
         };
 
