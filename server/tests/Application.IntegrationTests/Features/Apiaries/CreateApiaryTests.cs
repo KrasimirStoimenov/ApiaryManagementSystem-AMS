@@ -21,7 +21,7 @@ public class CreateApiaryTests(IntegrationTestWebAppFactory factory) : BaseInteg
         var apiaryId = await this.sender.Send(command);
 
         // Assert
-        var apiary = await this.dbContext.Apiaries.FirstOrDefaultAsync(p => p.Id == apiaryId);
+        var apiary = await this.dbContext.Apiaries.FirstOrDefaultAsync(x => x.Id == apiaryId);
 
         apiary.Should().NotBeNull();
         apiary!.Name.Should().Be(command.Name);
