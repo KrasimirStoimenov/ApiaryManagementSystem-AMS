@@ -1,4 +1,4 @@
-﻿namespace ApiaryManagementSystem.Application.IntegrationTests.Features.Apiaries;
+﻿namespace ApiaryManagementSystem.Application.IntegrationTests.Features.Apiaries.Commands;
 
 using ApiaryManagementSystem.Application.Features.Apiaries.Commands.CreateApiary;
 using FluentAssertions;
