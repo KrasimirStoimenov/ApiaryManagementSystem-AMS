@@ -31,6 +31,9 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
         // Assert
         apiaries.Page.Should().Be(DefaultPage);
         apiaries.PageSize.Should().Be(DefaultPageSize);
+        apiaries.TotalPages.Should().Be(2);
+        apiaries.HasNextPage.Should().BeTrue();
+        apiaries.HasPreviousPage.Should().BeFalse();
         apiaries.Items.Count.Should().Be(DefaultPageSize);
         apiaries.TotalCount.Should().Be(this.dbContext.Apiaries.Count());
     }
@@ -62,6 +65,9 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
 
         apiaries.Page.Should().Be(query.Page);
         apiaries.PageSize.Should().Be(query.PageSize);
+        apiaries.TotalPages.Should().Be(1);
+        apiaries.HasNextPage.Should().BeFalse();
+        apiaries.HasPreviousPage.Should().BeFalse();
         apiaries.Items.Count.Should().Be(allDbContextApiariesCount);
         apiaries.TotalCount.Should().Be(allDbContextApiariesCount);
     }
@@ -91,6 +97,9 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
         // Assert
         apiaries.Page.Should().Be(query.Page);
         apiaries.PageSize.Should().Be(query.PageSize);
+        apiaries.TotalPages.Should().Be(3);
+        apiaries.HasNextPage.Should().BeTrue();
+        apiaries.HasPreviousPage.Should().BeFalse();
         apiaries.Items.Count.Should().Be(query.PageSize);
         apiaries.TotalCount.Should().Be(this.dbContext.Apiaries.Count());
     }
@@ -123,6 +132,9 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
 
         apiaries.Page.Should().Be(query.Page);
         apiaries.PageSize.Should().Be(query.PageSize);
+        apiaries.TotalPages.Should().Be(2);
+        apiaries.HasNextPage.Should().BeFalse();
+        apiaries.HasPreviousPage.Should().BeTrue();
         apiaries.Items.Count.Should().Be(reminder);
         apiaries.TotalCount.Should().Be(allDbContextApiariesCount);
     }
