@@ -1,6 +1,6 @@
 ﻿namespace ApiaryManagementSystem.Application.Common.Constants;
 
-internal sealed class ApplicationConstants
+public sealed class ApplicationConstants
 {
     public class Pagination
     {
