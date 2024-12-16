@@ -17,7 +17,8 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
         var apiariesDbModels = this.fixture
             .Build<Apiary>()
             .Without(x => x.Hives)
-            .CreateMany(15);
+            .CreateMany(15)
+            .ToList();
 
         this.dbContext.Apiaries.AddRange(apiariesDbModels);
         await this.dbContext.SaveChangesAsync(CancellationToken.None);
@@ -41,7 +42,8 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
         var apiariesDbModels = this.fixture
             .Build<Apiary>()
             .Without(x => x.Hives)
-            .CreateMany(5);
+            .CreateMany(5)
+            .ToList();
 
         this.dbContext.Apiaries.AddRange(apiariesDbModels);
         await this.dbContext.SaveChangesAsync(CancellationToken.None);
@@ -71,7 +73,8 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
         var apiariesDbModels = this.fixture
             .Build<Apiary>()
             .Without(x => x.Hives)
-            .CreateMany(5);
+            .CreateMany(5)
+            .ToList();
 
         this.dbContext.Apiaries.AddRange(apiariesDbModels);
         await this.dbContext.SaveChangesAsync(CancellationToken.None);
@@ -99,7 +102,8 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
         var apiariesDbModels = this.fixture
             .Build<Apiary>()
             .Without(x => x.Hives)
-            .CreateMany(8);
+            .CreateMany(8)
+            .ToList();
 
         this.dbContext.Apiaries.AddRange(apiariesDbModels);
         await this.dbContext.SaveChangesAsync(CancellationToken.None);

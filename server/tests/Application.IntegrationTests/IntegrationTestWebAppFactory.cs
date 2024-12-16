@@ -27,7 +27,7 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>
             services
                 .AddEntityFrameworkInMemoryDatabase()
                 .AddDbContext<IApplicationDbContext, ApplicationDbContext>((sp, options)
-                    => options.UseInMemoryDatabase("TestDb").UseInternalServiceProvider(sp));
+                    => options.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalServiceProvider(sp));
         });
     }
 }
