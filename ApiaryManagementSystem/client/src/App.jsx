@@ -1,7 +1,8 @@
 import './App.css'
 
 function App() {
-  return (<></>
+  return (
+    <h2>ApiaryManagementSystem(AMS) - WORK IN PROGRESS</h2>
   )
 }
 
