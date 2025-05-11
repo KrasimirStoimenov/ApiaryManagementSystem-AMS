@@ -1,8 +1,12 @@
 import './App.css'
+import Header from './components/header/Header'
+import { AuthContextProvider } from './contexts/AuthContext'
 
 function App() {
   return (
-    <h2>ApiaryManagementSystem(AMS) - WORK IN PROGRESS</h2>
+    <AuthContextProvider>
+      <Header />
+    </AuthContextProvider>
   )
 }
 
