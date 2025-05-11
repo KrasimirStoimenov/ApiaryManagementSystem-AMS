@@ -15,6 +15,17 @@ builder.Services
     .AddInfrastructureServices(builder.Configuration)
     .AddWebServices();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
@@ -40,6 +51,7 @@ app.UseHealthChecks("/health")
     });
 
 app.UseExceptionHandler(options => { });
+app.UseCors("AllowReactApp");
 
 app.Map("/", () => Results.Redirect("/api"));
 
