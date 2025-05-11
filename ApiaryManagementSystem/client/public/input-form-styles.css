@@ -1,0 +1,106 @@
+﻿:root {
+    --validation-invalid-color: #dc3545;
+    --validation-success-color: #198754;
+    --fieldset-border-color: #eee;
+    --checkbox-background-gray-color: #ced4da;
+    --checkbox-background-blue-color: #0d6efd;
+    --checkbox-background-white-color: #fff;
+}
+
+fieldset {
+    text-align: start;
+    display: block;
+    max-width: 800px;
+    border: 2px solid var(--fieldset-border-color);
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em 0 rgb(0, 0, 0, 0.1);
+    padding: 2em;
+    margin: 0 auto;
+}
+
+fieldset legend {
+    display: block;
+    font-weight: bold;
+    font-size: 2em;
+    border-bottom: 2px solid var(--fieldset-border-color);
+    padding-bottom: 0.2em;
+    margin-bottom: 1em;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+}
+
+.field label {
+    display: block;
+    font-weight: bold;
+    order: -1;
+    padding-bottom: 0.3em;
+}
+
+.field input:user-valid {
+    border: 1px solid var(--validation-success-color)
+}
+
+.field input:user-invalid {
+    border: 1px solid var(--validation-invalid-color);
+}
+
+.field input:required~label::after,
+.field select:required~label::after,
+.field textarea:required~label::after {
+    display: inline-block;
+    content: '*';
+    padding-left: 0.3em;
+    color: var(--validation-invalid-color)
+}
+
+.field input[type=checkbox].form-check-input {
+    cursor: pointer;
+    width: 2em;
+    height: 2em;
+    position: relative;
+    border-radius: 0.5em;
+    margin: 0 1em;
+    box-shadow: none;
+}
+
+.field input[type=checkbox].form-check-input:before,
+.field input[type=checkbox].form-check-input:after {
+    content: "";
+    position: absolute;
+}
+
+.field input[type=checkbox].form-check-input:before {
+    width: 200%;
+    height: 100%;
+    background-color: var(--checkbox-background-white-color);
+    border-radius: 1.5em;
+    box-shadow: 0 0 0 1px var(--checkbox-background-gray-color);
+    transform: translate(-25%, 0);
+    transition: all 0.25s ease-in-out;
+
+}
+
+.field input[type=checkbox].form-check-input:after {
+    width: 80%;
+    height: 80%;
+    margin-top: 10%;
+    margin-left: 10%;
+    border-radius: 1.5em;
+    background-color: var(--checkbox-background-gray-color);
+    transform: translate(-60%, 0);
+    transition: all 0.25s cubic-bezier(0.75, 0.01, 0.48, 2);
+}
+
+.field input[type=checkbox].form-check-input:checked:before {
+    background-color: var(--checkbox-background-blue-color);
+    box-shadow: 0 0 0 1px var(--checkbox-background-blue-color);
+}
+
+.field input[type=checkbox].form-check-input:checked:after {
+    transform: translate(60%, 0);
+    background-color: var(--checkbox-background-white-color);
+}

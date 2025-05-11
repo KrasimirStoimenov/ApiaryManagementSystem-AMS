@@ -1,0 +1,10 @@
+.list-items-helper-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.list-items-helper-buttons button,
+.list-items-helper-buttons a {
+    flex-basis: 6rem;
+    margin-right: 2rem;
+}
