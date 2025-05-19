@@ -20,7 +20,8 @@ public sealed class GetHarvestsQuery : IRequest<PaginatedList<HarvestModel>>
 
 internal sealed class GetHarvestsQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetHarvestsQuery, PaginatedList<HarvestModel>>
+    IMapper mapper,
+    IUser user) : IRequestHandler<GetHarvestsQuery, PaginatedList<HarvestModel>>
 {
     public async Task<PaginatedList<HarvestModel>> Handle(GetHarvestsQuery request, CancellationToken cancellationToken)
     {
@@ -28,6 +29,7 @@ internal sealed class GetHarvestsQueryHandler(
         var pageSize = request.PageSize ?? DefaultPageSize;
 
         return await dbContext.Harvests
+            .Where(x => x.CreatedBy == user.Id)
             .ProjectTo<HarvestModel>(mapper.ConfigurationProvider)
             .ToPaginatedListAsync(page, pageSize);
     }

@@ -21,14 +21,17 @@ public sealed class GetApiariesQuery : IRequest<PaginatedList<ApiaryModel>>
 
 internal sealed class GetApiariesWithPaginationQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetApiariesQuery, PaginatedList<ApiaryModel>>
+    IMapper mapper,
+    IUser user) : IRequestHandler<GetApiariesQuery, PaginatedList<ApiaryModel>>
 {
     public async Task<PaginatedList<ApiaryModel>> Handle(GetApiariesQuery request, CancellationToken cancellationToken)
     {
         int page = request.Page ?? DefaultPage;
         int pageSize = request.PageSize ?? DefaultPageSize;
 
-        var apiariesQuery = dbContext.Apiaries.AsQueryable();
+        var apiariesQuery = dbContext.Apiaries
+            .Where(x => x.CreatedBy == user.Id)
+            .AsQueryable();
 
         if (!string.IsNullOrEmpty(request.SearchTerm))
         {

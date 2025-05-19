@@ -23,7 +23,8 @@ public sealed class GetHivesQuery : IRequest<PaginatedList<HiveModel>>
 
 internal sealed class GetHivesQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetHivesQuery, PaginatedList<HiveModel>>
+    IMapper mapper,
+    IUser user) : IRequestHandler<GetHivesQuery, PaginatedList<HiveModel>>
 {
     public async Task<PaginatedList<HiveModel>> Handle(GetHivesQuery request, CancellationToken cancellationToken)
     {
@@ -31,7 +32,9 @@ internal sealed class GetHivesQueryHandler(
         int pageSize = request.PageSize ?? DefaultPageSize;
         var searchTerm = request.SearchTerm;
 
-        var hivesQuery = dbContext.Hives.AsQueryable();
+        var hivesQuery = dbContext.Hives
+            .Where(x => x.CreatedBy == user.Id)
+            .AsQueryable();
 
         if (!string.IsNullOrEmpty(searchTerm))
         {

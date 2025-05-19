@@ -20,7 +20,8 @@ public sealed class GetDiseasesQuery : IRequest<PaginatedList<DiseaseModel>>
 
 internal sealed class GetDiseasesQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetDiseasesQuery, PaginatedList<DiseaseModel>>
+    IMapper mapper,
+    IUser user) : IRequestHandler<GetDiseasesQuery, PaginatedList<DiseaseModel>>
 {
     public async Task<PaginatedList<DiseaseModel>> Handle(GetDiseasesQuery request, CancellationToken cancellationToken)
     {
@@ -28,6 +29,7 @@ internal sealed class GetDiseasesQueryHandler(
         var pageSize = request.PageSize ?? DefaultPageSize;
 
         return await dbContext.Diseases
+            .Where(x => x.CreatedBy == user.Id)
             .ProjectTo<DiseaseModel>(mapper.ConfigurationProvider)
             .ToPaginatedListAsync(page, pageSize);
     }

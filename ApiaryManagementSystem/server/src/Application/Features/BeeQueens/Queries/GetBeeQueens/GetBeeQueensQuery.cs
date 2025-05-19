@@ -20,7 +20,8 @@ public sealed class GetBeeQueensQuery : IRequest<PaginatedList<BeeQueenModel>>
 
 internal sealed class GetBeeQueensQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetBeeQueensQuery, PaginatedList<BeeQueenModel>>
+    IMapper mapper,
+    IUser user) : IRequestHandler<GetBeeQueensQuery, PaginatedList<BeeQueenModel>>
 {
     public async Task<PaginatedList<BeeQueenModel>> Handle(GetBeeQueensQuery request, CancellationToken cancellationToken)
     {
@@ -28,6 +29,7 @@ internal sealed class GetBeeQueensQueryHandler(
         var pageSize = request.PageSize ?? DefaultPageSize;
 
         return await dbContext.BeeQueens
+            .Where(x => x.CreatedBy == user.Id)
             .ProjectTo<BeeQueenModel>(mapper.ConfigurationProvider)
             .ToPaginatedListAsync(page, pageSize);
     }

@@ -21,7 +21,8 @@ public sealed class GetInspectionsQuery : IRequest<PaginatedList<InspectionModel
 
 internal sealed class GetInspectionsQueryHandler(
     IApplicationDbContext dbContext,
-    IMapper mapper) : IRequestHandler<GetInspectionsQuery, PaginatedList<InspectionModel>>
+    IMapper mapper,
+    IUser user) : IRequestHandler<GetInspectionsQuery, PaginatedList<InspectionModel>>
 {
     public async Task<PaginatedList<InspectionModel>> Handle(GetInspectionsQuery request, CancellationToken cancellationToken)
     {
@@ -29,6 +30,7 @@ internal sealed class GetInspectionsQueryHandler(
         int pageSize = request.PageSize ?? DefaultPageSize;
 
         return await dbContext.Inspections
+            .Where(x => x.CreatedBy == user.Id)
             .ProjectTo<InspectionModel>(mapper.ConfigurationProvider)
             .ToPaginatedListAsync(page, pageSize);
     }
