@@ -30,8 +30,3 @@ export function useAuthContext() {
 
     return authData;
 }
-
-// {
-//     "email": "test@test.com",
-//     "password": "Test123!"
-//   }

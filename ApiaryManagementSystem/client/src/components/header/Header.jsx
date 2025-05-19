@@ -10,7 +10,7 @@ export default function Header() {
     return (
         <Navbar expand="lg" className="bg-body-tertiary p-2 mb-3">
             <Container>
-                <Navbar.Brand as={Link} to='/'>Apiary Management System (AMS)</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/'>AMS-HiveManager</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
