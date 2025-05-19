@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
 
-import { useAuthContext } from "../contexts/AuthContext";
-
 import apiariesAPI from "../api/apiaries-api";
 
 export const useGetAllApiaries = () => {
@@ -11,7 +9,7 @@ export const useGetAllApiaries = () => {
     useEffect(() => {
         (async () => {
             const result = await apiariesAPI.getAll();
-            
+
             setApiaries(Object.values(result.items));
             setIsFetching(false);
         })();
