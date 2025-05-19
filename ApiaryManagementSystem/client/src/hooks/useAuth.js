@@ -1,6 +1,7 @@
 import { useAuthContext } from "../contexts/AuthContext";
 
 import authAPI from "../api/auth-api";
+import { useEffect } from "react";
 
 export const useLogin = () => {
     const { changeAuthState } = useAuthContext();
@@ -23,10 +24,15 @@ export const useRegister = () => {
     const { changeAuthState } = useAuthContext();
     const registerHandler = async (email, password) => {
 
-        const result = await authAPI.register({ email, password });
-        delete result.password;
+        await authAPI.register({ email, password });
+        const loginResult = await authAPI.login({email,password});
 
-        changeAuthState(result);
+        const authData = {
+            email: email,
+            accessToken: loginResult.accessToken
+        };
+
+        changeAuthState(authData);
     };
 
     return registerHandler;

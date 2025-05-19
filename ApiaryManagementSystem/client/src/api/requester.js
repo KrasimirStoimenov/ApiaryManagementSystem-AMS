@@ -11,6 +11,10 @@ async function requester(method, url, data) {
             throw new Error(error.message);
         }
 
+        if (response.status == 200 && url.includes('register')) {
+            return;
+        }
+
         try {
             return await response.json();
         }
