@@ -7,13 +7,12 @@ import apiariesAPI from "../api/apiaries-api";
 export const useGetAllApiaries = () => {
     const [apiaries, setApiaries] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
-    const { userId } = useAuthContext();
 
     useEffect(() => {
         (async () => {
-            const result = await apiariesAPI.getAll(userId);
-
-            setApiaries(Object.values(result));
+            const result = await apiariesAPI.getAll();
+            
+            setApiaries(Object.values(result.items));
             setIsFetching(false);
         })();
     }, []);
