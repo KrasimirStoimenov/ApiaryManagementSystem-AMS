@@ -39,7 +39,7 @@ function createOptions(method, data) {
 
     const authData = getAuthData();
     if (authData && authData.accessToken) {
-        options.headers['X-Authorization'] = authData.accessToken;
+        options.headers['Authorization'] = 'Bearer ' + authData.accessToken;
     }
 
     return options;
