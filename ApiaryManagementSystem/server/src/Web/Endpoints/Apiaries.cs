@@ -7,6 +7,8 @@ using ApiaryManagementSystem.Application.Features.Apiaries.Commands.UpdateApiary
 using ApiaryManagementSystem.Application.Features.Apiaries.Queries;
 using ApiaryManagementSystem.Application.Features.Apiaries.Queries.GetApiaries;
 using ApiaryManagementSystem.Application.Features.Apiaries.Queries.GetApiaryById;
+using ApiaryManagementSystem.Application.Features.Hives.Queries;
+using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHivesByApiaryId;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
 
@@ -15,18 +17,22 @@ public class Apiaries : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .RequireAuthorization()
-            .MapGet(GetApiaries)
-            .MapGet(GetApiaryById, "{id}")
-            .MapPost(CreateApiary)
-            .MapPut(UpdateApiary, "{id}")
-            .MapDelete(DeleteApiary, "{id}");
+            //.RequireAuthorization()
+            .MapGet(this.GetApiaries)
+            .MapGet(this.GetApiaryById, "{id}")
+            .MapGet(this.GetHivesByApiaryId, "{apiaryId}/hives")
+            .MapPost(this.CreateApiary)
+            .MapPut(this.UpdateApiary, "{id}")
+            .MapDelete(this.DeleteApiary, "{id}");
     }
     public async Task<PaginatedList<ApiaryModel>> GetApiaries(ISender sender, [AsParameters] GetApiariesQuery query)
         => await sender.Send(query);
 
     public async Task<ApiaryModel> GetApiaryById(ISender sender, Guid id)
         => await sender.Send(new GetApiaryByIdQuery() { ApiaryId = id });
+
+    public async Task<IReadOnlyCollection<HiveModel>> GetHivesByApiaryId(ISender sender, Guid apiaryId)
+        => await sender.Send(new GetHivesByApiaryIdQuery() { ApiaryId = apiaryId });
 
     public async Task<IResult> CreateApiary(ISender sender, CreateApiaryCommand command)
     {

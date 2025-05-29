@@ -54,12 +54,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
@@ -88,12 +83,7 @@
           "201": {
             "description": ""
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
     "/api/Apiaries/{id}": {
@@ -125,12 +115,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -181,12 +166,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -215,12 +195,42 @@
           "204": {
             "description": ""
           }
-        },
-        "security": [
+        }
+      }
+    },
+    "/api/Apiaries/{apiaryId}/hives": {
+      "get": {
+        "tags": [
+          "Apiaries"
+        ],
+        "operationId": "GetHivesByApiaryId",
+        "parameters": [
           {
-            "JWT": []
+            "name": "apiaryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HiveModel"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/BeeQueens": {
@@ -1719,6 +1729,37 @@
           }
         }
       },
+      "HiveModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBought": {
+            "type": "string",
+            "format": "date"
+          },
+          "apiaryId": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
       "CreateApiaryCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -2119,37 +2160,6 @@
           },
           "hasNextPage": {
             "type": "boolean"
-          }
-        }
-      },
-      "HiveModel": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "guid"
-          },
-          "number": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "color": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateBought": {
-            "type": "string",
-            "format": "date"
-          },
-          "apiaryId": {
-            "type": "string",
-            "format": "guid"
           }
         }
       },
