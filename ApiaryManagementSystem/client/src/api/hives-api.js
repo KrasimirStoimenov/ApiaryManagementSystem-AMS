@@ -1,6 +1,7 @@
 import requester from './requester'
 
-const BASE_URL = `${import.meta.env.VITE_API_URL}/data/hives`;
+const BASE_URL = `${import.meta.env.VITE_API_URL}`;
+const BASE_HIVES_URL = `${BASE_URL}/api/hives`;
 
 const getAll = (userId) => {
     const params = new URLSearchParams({
@@ -21,15 +22,9 @@ const getHiveWithApiaryById = (hiveId) => {
     return requester.get(`${BASE_URL}/${hiveId}?${params.toString()}`);
 };
 
-const getByApiaryId = (apiaryId) => {
-    const params = new URLSearchParams({
-        where: `apiaryId="${apiaryId}"`
-    });
+const getHivesByApiaryId = (apiaryId) => requester.get(`${BASE_URL}/api/apiaries/${apiaryId}/hives`);
 
-    return requester.get(`${BASE_URL}?${params.toString()}`);
-};
-
-const add = (hive) => requester.post(`${BASE_URL}`, hive);
+const add = (hive) => requester.post(`${BASE_HIVES_URL}`, hive);
 const update = (hiveId, hive) => requester.put(`${BASE_URL}/${hiveId}`, hive);
 const remove = (hiveId) => requester.del(`${BASE_URL}/${hiveId}`);
 
@@ -37,7 +32,7 @@ const hivesAPI = {
     getAll,
     getById,
     getHiveWithApiaryById,
-    getByApiaryId,
+    getHivesByApiaryId,
     add,
     update,
     remove

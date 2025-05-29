@@ -82,7 +82,7 @@ export const useGetHiveByApiaryId = (apiaryId) => {
 
     useEffect(() => {
         (async () => {
-            const result = await hivesAPI.getByApiaryId(apiaryId);
+            const result = await hivesAPI.getHivesByApiaryId(apiaryId);
 
             setApiaryHives(Object.values(result));
             setIsFetching(false);
@@ -97,12 +97,7 @@ export const useGetHiveByApiaryId = (apiaryId) => {
 
 export const useAddHive = () => {
     const addHiveHandler = async (data) => {
-        const formattedData = {
-            ...data,
-            dateBought: new Date(data.dateBought).toISOString(),
-        };
-
-        return await hivesAPI.add(formattedData);
+        return await hivesAPI.add(data);
     };
 
     return addHiveHandler;

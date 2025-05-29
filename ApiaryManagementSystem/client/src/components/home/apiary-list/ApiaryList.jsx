@@ -24,8 +24,8 @@ export default function ApiaryList() {
                         ? <Accordion defaultActiveKey="0">
                             {apiaries.map((apiary, index) =>
                                 <ApiaryListItem
-                                    key={apiary._id}
-                                    apiaryId={apiary._id}
+                                    key={apiary.id}
+                                    apiaryId={apiary.id}
                                     apiaryName={apiary.name}
                                     apiaryLocation={apiary.location}
                                     eventKey={index.toString()}
