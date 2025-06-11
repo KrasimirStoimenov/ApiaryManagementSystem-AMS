@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
 
-import { useAuthContext } from "../contexts/AuthContext";
-
 import beeQueensAPI from "../api/beeQueens-api";
 import { toast } from "react-toastify";
 
 export const useGetAllBeeQueens = () => {
     const [beeQueens, setBeeQueens] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
-    const { userId } = useAuthContext();
 
     useEffect(() => {
         (async () => {
             try {
-                const result = await beeQueensAPI.getAll(userId);
+                const result = await beeQueensAPI.getAll();
                 setBeeQueens(Object.values(result.items));
             } catch (error) {
                 toast.error(error.message);

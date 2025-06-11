@@ -29,7 +29,7 @@ export default function BeeQueenList() {
                     <tbody>
                         {beeQueens.map(beeQueen =>
                             <BeeQueenListItem
-                                key={beeQueen._id}
+                                key={beeQueen.id}
                                 beeQueen={beeQueen}
                             />
                         )}

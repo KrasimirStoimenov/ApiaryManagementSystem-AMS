@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { useAuthContext } from "../contexts/AuthContext";
-
 import inspectionsAPI from "../api/inspections-api";
 
 export const useGetAllInspections = () => {
     const [inspections, setInspections] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
-    const { userId } = useAuthContext();
 
     useEffect(() => {
         (async () => {
             try {
-                const result = await inspectionsAPI.getAll(userId);
+                const result = await inspectionsAPI.getAll();
                 setInspections(Object.values(result.items));
             } catch (error) {
                 toast.error(error.message);

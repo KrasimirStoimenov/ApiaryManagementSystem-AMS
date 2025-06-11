@@ -1,15 +1,8 @@
 import requester from "./requester"
 
-const BASE_URL = `${import.meta.env.VITE_API_URL}/data/inspections`;
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/inspections`;
 
-const getAll = (userId) => {
-    const params = new URLSearchParams({
-        where: `_ownerId="${userId}"`,
-        load: `hive=hiveId:hives`
-    });
-
-    return requester.get(`${BASE_URL}?${params.toString()}`);
-};
+const getAll = () => requester.get(`${BASE_URL}`);
 
 const getById = (inspectionId) => requester.get(`${BASE_URL}/${inspectionId}`);
 const getByHiveId = (hiveId) => {
