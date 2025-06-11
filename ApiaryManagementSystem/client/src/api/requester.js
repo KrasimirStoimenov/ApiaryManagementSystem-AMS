@@ -8,7 +8,7 @@ async function requester(method, url, data) {
 
         if (response.ok == false) {
             const error = await response.json();
-            throw new Error(error.message);
+            throw new Error(error.title);
         }
 
         if (response.status == 200 && url.includes('register')) {

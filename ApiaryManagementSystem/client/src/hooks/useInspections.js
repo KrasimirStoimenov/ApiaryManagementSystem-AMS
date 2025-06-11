@@ -13,7 +13,7 @@ export const useGetAllInspections = () => {
         (async () => {
             try {
                 const result = await inspectionsAPI.getAll(userId);
-                setInspections(Object.values(result));
+                setInspections(Object.values(result.items));
             } catch (error) {
                 toast.error(error.message);
             } finally {

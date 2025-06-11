@@ -13,7 +13,7 @@ export const useGetAllHarvests = () => {
         (async () => {
             try {
                 const result = await harvestsAPI.getAll(userId);
-                setHarvests(Object.values(result));
+                setHarvests(Object.values(result.items));
             } catch (error) {
                 toast.error(error.message);
             } finally {

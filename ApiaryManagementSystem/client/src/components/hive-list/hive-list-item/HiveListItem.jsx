@@ -6,11 +6,12 @@ export default function HiveListItem({
 }) {
     return (
         <tr>
-            <td><Link to={`/hives/${hive._id}/details`}>№{hive.number}</Link></td>
+            <td><Link to={`/hives/${hive.id}/details`}>№{hive.number}</Link></td>
             <td>{hive.type}</td>
+            <td>{hive.status}</td>
             <td>{hive.color}</td>
-            <td>{formatIsoStringToDisplayDate(hive.dateBought)}</td>
-            <td>{`${hive.apiary.name} - ${hive.apiary.location}`}</td>
+            <td>{hive.dateBought}</td>
+            {/* <td>{`${hive.apiary.name} - ${hive.apiary.location}`}</td> */}
         </tr>
     );
 };

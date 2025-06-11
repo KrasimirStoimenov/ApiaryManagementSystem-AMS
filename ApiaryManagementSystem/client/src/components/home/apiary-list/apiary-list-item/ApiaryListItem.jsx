@@ -34,7 +34,7 @@ export default function ApiaryListItem({
                             ? <Row xs={1} md={3} lg={4} className="g-4">
                                 {apiaryHives.map(hive =>
                                     <HiveCard
-                                        key={hive._id}
+                                        key={hive.id}
                                         hive={hive}
                                     />
                                 )}

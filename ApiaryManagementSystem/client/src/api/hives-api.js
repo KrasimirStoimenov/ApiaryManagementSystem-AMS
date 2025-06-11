@@ -3,15 +3,7 @@ import requester from './requester'
 const BASE_URL = `${import.meta.env.VITE_API_URL}`;
 const BASE_HIVES_URL = `${BASE_URL}/api/hives`;
 
-const getAll = (userId) => {
-    const params = new URLSearchParams({
-        where: `_ownerId="${userId}"`,
-        load: `apiary=apiaryId:apiaries`
-    });
-
-    return requester.get(`${BASE_URL}?${params.toString()}`);
-};
-
+const getAll = () =>  requester.get(`${BASE_HIVES_URL}`);
 const getById = (hiveId) => requester.get(`${BASE_URL}/${hiveId}`);
 
 const getHiveWithApiaryById = (hiveId) => {

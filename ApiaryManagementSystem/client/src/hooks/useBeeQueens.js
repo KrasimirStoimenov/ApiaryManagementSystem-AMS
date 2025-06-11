@@ -14,7 +14,7 @@ export const useGetAllBeeQueens = () => {
         (async () => {
             try {
                 const result = await beeQueensAPI.getAll(userId);
-                setBeeQueens(Object.values(result));
+                setBeeQueens(Object.values(result.items));
             } catch (error) {
                 toast.error(error.message);
             } finally {

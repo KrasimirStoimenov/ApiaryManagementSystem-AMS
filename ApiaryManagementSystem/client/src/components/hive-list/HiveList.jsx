@@ -22,6 +22,7 @@ export default function HiveList() {
                         <tr>
                             <th>Number</th>
                             <th>Type</th>
+                            <th>Status</th>
                             <th>Color</th>
                             <th>Date Bought</th>
                             <th>Apiary</th>
@@ -30,7 +31,7 @@ export default function HiveList() {
                     <tbody>
                         {hives.map(hive =>
                             <HiveListItem
-                                key={hive._id}
+                                key={hive.id}
                                 hive={hive}
                             />
                         )}

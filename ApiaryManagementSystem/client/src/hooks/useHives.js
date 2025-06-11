@@ -13,8 +13,8 @@ export const useGetAllHives = () => {
     useEffect(() => {
         (async () => {
             try {
-                const result = await hivesAPI.getAll(userId);
-                setHives(Object.values(result));
+                const result = await hivesAPI.getAll();
+                setHives(Object.values(result.items));
             } catch (error) {
                 toast.error(error.message);
             } finally {
