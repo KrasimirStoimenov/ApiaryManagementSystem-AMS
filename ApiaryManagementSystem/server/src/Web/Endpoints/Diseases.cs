@@ -17,15 +17,19 @@ public sealed class Diseases : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapGet(GetDiseases)
-            .MapGet(GetDiseaseById, "{id}")
-            .MapPost(CreateDisease)
-            .MapPut(UpdateDisease, "{id}")
-            .MapDelete(DeleteDisease, "{id}");
+            .MapGet(this.GetDiseases)
+            .MapGet(this.GetDiseaseById, "{id}")
+            .MapPost(this.CreateDisease)
+            .MapPut(this.UpdateDisease, "{id}")
+            .MapDelete(this.DeleteDisease, "{id}");
     }
 
-    public async Task<PaginatedList<DiseaseModel>> GetDiseases(ISender sender, [AsParameters] GetDiseasesQuery query)
-        => await sender.Send(query);
+    public async Task<PaginatedList<DiseaseModel>> GetDiseases(ISender sender, int page = 1, int pageSize = 10)
+        => await sender.Send(new GetDiseasesQuery
+        {
+            Page = page,
+            PageSize = pageSize
+        });
 
     public async Task<DiseaseModel> GetDiseaseById(ISender sender, Guid id)
         => await sender.Send(new GetDiseaseByIdQuery() { DiseaseId = id });

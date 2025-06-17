@@ -1,7 +1,5 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Hives.Queries.GetHives;
 
-using System.Threading;
-using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Mappings;
 using ApiaryManagementSystem.Application.Common.Models;
@@ -10,15 +8,13 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 
-using static Common.Constants.ApplicationConstants.Pagination;
-
 public sealed class GetHivesQuery : IRequest<PaginatedList<HiveModel>>
 {
     public string? SearchTerm { get; init; }
 
-    public int? Page { get; init; }
+    public required int Page { get; init; }
 
-    public int? PageSize { get; init; }
+    public required int PageSize { get; init; }
 }
 
 internal sealed class GetHivesQueryHandler(
@@ -28,8 +24,6 @@ internal sealed class GetHivesQueryHandler(
 {
     public async Task<PaginatedList<HiveModel>> Handle(GetHivesQuery request, CancellationToken cancellationToken)
     {
-        int page = request.Page ?? DefaultPage;
-        int pageSize = request.PageSize ?? DefaultPageSize;
         var searchTerm = request.SearchTerm;
 
         var hivesQuery = dbContext.Hives
@@ -47,6 +41,6 @@ internal sealed class GetHivesQueryHandler(
 
         return await hivesQuery
             .ProjectTo<HiveModel>(mapper.ConfigurationProvider)
-            .ToPaginatedListAsync<HiveModel>(page, pageSize);
+            .ToPaginatedListAsync<HiveModel>(request.Page, request.PageSize);
     }
 }

@@ -17,15 +17,19 @@ public class Harvests : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapGet(GetHarvests)
-            .MapGet(GetHarvestById, "{id}")
-            .MapPost(CreateHarvest)
-            .MapPut(UpdateHarvest, "{id}")
-            .MapDelete(DeleteHarvest, "{id}");
+            .MapGet(this.GetHarvests)
+            .MapGet(this.GetHarvestById, "{id}")
+            .MapPost(this.CreateHarvest)
+            .MapPut(this.UpdateHarvest, "{id}")
+            .MapDelete(this.DeleteHarvest, "{id}");
     }
 
-    public async Task<PaginatedList<HarvestModel>> GetHarvests(ISender sender, [AsParameters] GetHarvestsQuery query)
-        => await sender.Send(query);
+    public async Task<PaginatedList<HarvestModel>> GetHarvests(ISender sender, int page = 1, int pageSize = 10)
+        => await sender.Send(new GetHarvestsQuery
+        {
+            Page = page,
+            PageSize = pageSize
+        });
 
     public async Task<HarvestModel> GetHarvestById(ISender sender, Guid id)
         => await sender.Send(new GetHarvestByIdQuery() { HarvestId = id });

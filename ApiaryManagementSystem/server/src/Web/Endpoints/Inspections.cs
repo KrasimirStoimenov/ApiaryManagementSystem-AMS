@@ -15,14 +15,18 @@ public class Inspections : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapGet(GetInspections)
-            .MapGet(GetInspectionById, "{id}")
-            .MapPost(CreateInspection)
-            .MapPut(UpdateInspection, "{id}")
-            .MapDelete(DeleteInspection, "{id}");
+            .MapGet(this.GetInspections)
+            .MapGet(this.GetInspectionById, "{id}")
+            .MapPost(this.CreateInspection)
+            .MapPut(this.UpdateInspection, "{id}")
+            .MapDelete(this.DeleteInspection, "{id}");
     }
-    public async Task<PaginatedList<InspectionModel>> GetInspections(ISender sender, [AsParameters] GetInspectionsQuery query)
-        => await sender.Send(query);
+    public async Task<PaginatedList<InspectionModel>> GetInspections(ISender sender, int page = 1, int pageSize = 10)
+        => await sender.Send(new GetInspectionsQuery
+        {
+            Page = page,
+            PageSize = pageSize
+        });
 
     public async Task<InspectionModel> GetInspectionById(ISender sender, Guid id)
         => await sender.Send(new GetInspectionByIdQuery() { InspectionId = id });

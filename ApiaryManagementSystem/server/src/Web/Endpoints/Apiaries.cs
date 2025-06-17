@@ -25,8 +25,13 @@ public class Apiaries : EndpointGroupBase
             .MapPut(this.UpdateApiary, "{id}")
             .MapDelete(this.DeleteApiary, "{id}");
     }
-    public async Task<PaginatedList<ApiaryModel>> GetApiaries(ISender sender, [AsParameters] GetApiariesQuery query)
-        => await sender.Send(query);
+    public async Task<PaginatedList<ApiaryModel>> GetApiaries(ISender sender, string? searchTerm, int page = 1, int pageSize = 10)
+        => await sender.Send(new GetApiariesQuery
+        {
+            SearchTerm = searchTerm,
+            Page = page,
+            PageSize = pageSize
+        });
 
     public async Task<ApiaryModel> GetApiaryById(ISender sender, Guid id)
         => await sender.Send(new GetApiaryByIdQuery() { ApiaryId = id });

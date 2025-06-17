@@ -6,38 +6,8 @@ using AutoFixture;
 using FluentAssertions;
 using Xunit;
 
-using static Application.Common.Constants.ApplicationConstants.Pagination;
-
 public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegrationTest(factory)
 {
-    [Fact]
-    public async Task GetApiaries_ShouldGetDefaultPageSizeApiariesCount_WhenPageSizeIsNotProvided()
-    {
-        // Arrange
-        var apiariesDbModels = this.fixture
-            .Build<Apiary>()
-            .Without(x => x.Hives)
-            .CreateMany(15)
-            .ToList();
-
-        this.dbContext.Apiaries.AddRange(apiariesDbModels);
-        await this.dbContext.SaveChangesAsync(CancellationToken.None);
-
-        var query = new GetApiariesQuery();
-
-        // Act
-        var apiaries = await this.sender.Send(query);
-
-        // Assert
-        apiaries.Page.Should().Be(DefaultPage);
-        apiaries.PageSize.Should().Be(DefaultPageSize);
-        apiaries.TotalPages.Should().Be(2);
-        apiaries.HasNextPage.Should().BeTrue();
-        apiaries.HasPreviousPage.Should().BeFalse();
-        apiaries.Items.Count.Should().Be(DefaultPageSize);
-        apiaries.TotalCount.Should().Be(this.dbContext.Apiaries.Count());
-    }
-
     [Fact]
     public async Task GetApiaries_ShouldGetAsManyApiariesAsCan_WhenPageSizeIsMoreThanApiariesCount()
     {
@@ -155,7 +125,9 @@ public class GetApiariesTests(IntegrationTestWebAppFactory factory) : BaseIntegr
 
         var query = new GetApiariesQuery()
         {
-            SearchTerm = "Test"
+            SearchTerm = "Test",
+            Page = 1,
+            PageSize = 10
         };
 
         // Act

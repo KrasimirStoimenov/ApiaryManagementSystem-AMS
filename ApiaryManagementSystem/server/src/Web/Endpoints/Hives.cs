@@ -16,15 +16,20 @@ public class Hives : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapGet(GetHives)
-            .MapGet(GetHiveById, "{id}")
-            .MapPost(CreateHive)
-            .MapPut(UpdateHive, "{id}")
-            .MapDelete(DeleteHive, "{id}");
+            .MapGet(this.GetHives)
+            .MapGet(this.GetHiveById, "{id}")
+            .MapPost(this.CreateHive)
+            .MapPut(this.UpdateHive, "{id}")
+            .MapDelete(this.DeleteHive, "{id}");
     }
 
-    public async Task<PaginatedList<HiveModel>> GetHives(ISender sender, [AsParameters] GetHivesQuery query)
-        => await sender.Send(query);
+    public async Task<PaginatedList<HiveModel>> GetHives(ISender sender, string? searchTerm, int page = 1, int pageSize = 10)
+        => await sender.Send(new GetHivesQuery
+        {
+            SearchTerm = searchTerm,
+            Page = page,
+            PageSize = pageSize
+        });
 
     public async Task<HiveModel> GetHiveById(ISender sender, Guid id)
         => await sender.Send(new GetHiveByIdQuery() { HiveId = id });

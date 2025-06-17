@@ -17,15 +17,19 @@ public class BeeQueens : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapGet(GetBeeQueens)
-            .MapGet(GetBeeQueenById, "{id}")
-            .MapPost(CreateBeeQueen)
-            .MapPut(UpdateBeeQueen, "{id}")
-            .MapDelete(DeleteBeeQueen, "{id}");
+            .MapGet(this.GetBeeQueens)
+            .MapGet(this.GetBeeQueenById, "{id}")
+            .MapPost(this.CreateBeeQueen)
+            .MapPut(this.UpdateBeeQueen, "{id}")
+            .MapDelete(this.DeleteBeeQueen, "{id}");
     }
 
-    public async Task<PaginatedList<BeeQueenModel>> GetBeeQueens(ISender sender, [AsParameters] GetBeeQueensQuery query)
-        => await sender.Send(query);
+    public async Task<PaginatedList<BeeQueenModel>> GetBeeQueens(ISender sender, int page = 1, int pageSize = 10)
+        => await sender.Send(new GetBeeQueensQuery
+        {
+            Page = page,
+            PageSize = pageSize
+        });
 
     public async Task<BeeQueenModel> GetBeeQueenById(ISender sender, Guid id)
         => await sender.Send(new GetBeeQueenByIdQuery() { BeeQueenId = id });

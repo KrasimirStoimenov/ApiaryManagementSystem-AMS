@@ -1,7 +1,5 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Inspections.Queries.GetInspections;
 
-using System.Threading;
-using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Mappings;
 using ApiaryManagementSystem.Application.Common.Models;
@@ -10,13 +8,11 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 
-using static Common.Constants.ApplicationConstants.Pagination;
-
 public sealed class GetInspectionsQuery : IRequest<PaginatedList<InspectionModel>>
 {
-    public int? Page { get; init; }
+    public required int Page { get; init; }
 
-    public int? PageSize { get; init; }
+    public required int PageSize { get; init; }
 }
 
 internal sealed class GetInspectionsQueryHandler(
@@ -25,13 +21,8 @@ internal sealed class GetInspectionsQueryHandler(
     IUser user) : IRequestHandler<GetInspectionsQuery, PaginatedList<InspectionModel>>
 {
     public async Task<PaginatedList<InspectionModel>> Handle(GetInspectionsQuery request, CancellationToken cancellationToken)
-    {
-        int page = request.Page ?? DefaultPage;
-        int pageSize = request.PageSize ?? DefaultPageSize;
-
-        return await dbContext.Inspections
+        => await dbContext.Inspections
             .Where(x => x.CreatedBy == user.Id)
             .ProjectTo<InspectionModel>(mapper.ConfigurationProvider)
-            .ToPaginatedListAsync(page, pageSize);
-    }
+            .ToPaginatedListAsync(request.Page, request.PageSize);
 }

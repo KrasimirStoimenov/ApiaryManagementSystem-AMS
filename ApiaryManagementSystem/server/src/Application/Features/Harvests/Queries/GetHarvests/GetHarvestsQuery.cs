@@ -1,7 +1,5 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Harvests.Queries.GetHarvests;
 
-using System.Threading;
-using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Mappings;
 using ApiaryManagementSystem.Application.Common.Models;
@@ -9,13 +7,11 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 
-using static Common.Constants.ApplicationConstants.Pagination;
-
 public sealed class GetHarvestsQuery : IRequest<PaginatedList<HarvestModel>>
 {
-    public int? Page { get; init; }
+    public required int Page { get; init; }
 
-    public int? PageSize { get; init; }
+    public required int PageSize { get; init; }
 }
 
 internal sealed class GetHarvestsQueryHandler(
@@ -24,13 +20,8 @@ internal sealed class GetHarvestsQueryHandler(
     IUser user) : IRequestHandler<GetHarvestsQuery, PaginatedList<HarvestModel>>
 {
     public async Task<PaginatedList<HarvestModel>> Handle(GetHarvestsQuery request, CancellationToken cancellationToken)
-    {
-        var page = request.Page ?? DefaultPage;
-        var pageSize = request.PageSize ?? DefaultPageSize;
-
-        return await dbContext.Harvests
+        => await dbContext.Harvests
             .Where(x => x.CreatedBy == user.Id)
             .ProjectTo<HarvestModel>(mapper.ConfigurationProvider)
-            .ToPaginatedListAsync(page, pageSize);
-    }
+            .ToPaginatedListAsync(request.Page, request.PageSize);
 }

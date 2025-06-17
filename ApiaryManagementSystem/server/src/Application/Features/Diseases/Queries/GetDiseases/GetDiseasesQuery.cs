@@ -1,7 +1,5 @@
 ﻿namespace ApiaryManagementSystem.Application.Features.Diseases.Queries.GetDiseases;
 
-using System.Threading;
-using System.Threading.Tasks;
 using ApiaryManagementSystem.Application.Common.Interfaces;
 using ApiaryManagementSystem.Application.Common.Mappings;
 using ApiaryManagementSystem.Application.Common.Models;
@@ -9,13 +7,11 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 
-using static Common.Constants.ApplicationConstants.Pagination;
-
 public sealed class GetDiseasesQuery : IRequest<PaginatedList<DiseaseModel>>
 {
-    public int? Page { get; init; }
+    public required int Page { get; init; }
 
-    public int? PageSize { get; init; }
+    public required int PageSize { get; init; }
 }
 
 internal sealed class GetDiseasesQueryHandler(
@@ -24,13 +20,8 @@ internal sealed class GetDiseasesQueryHandler(
     IUser user) : IRequestHandler<GetDiseasesQuery, PaginatedList<DiseaseModel>>
 {
     public async Task<PaginatedList<DiseaseModel>> Handle(GetDiseasesQuery request, CancellationToken cancellationToken)
-    {
-        var page = request.Page ?? DefaultPage;
-        var pageSize = request.PageSize ?? DefaultPageSize;
-
-        return await dbContext.Diseases
+        => await dbContext.Diseases
             .Where(x => x.CreatedBy == user.Id)
             .ProjectTo<DiseaseModel>(mapper.ConfigurationProvider)
-            .ToPaginatedListAsync(page, pageSize);
-    }
+            .ToPaginatedListAsync(request.Page, request.PageSize);
 }
