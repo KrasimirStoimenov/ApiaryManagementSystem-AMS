@@ -7,7 +7,7 @@ export default function HiveCard({
 }) {
     return (
         <Col>
-            <Link to={`/hives/${hive._id}/details`}>
+            <Link to={`/hives/${hive.id}/details`}>
                 <Card>
                     <Card.Img height='250' variant="top" src="https://thewildlifecommunity.co.uk/cdn/shop/products/SBH1_Solitary_Bee_Hive_5_Web.jpg?v=1622645194" />
                     <Card.Body>
