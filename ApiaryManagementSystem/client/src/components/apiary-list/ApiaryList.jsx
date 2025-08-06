@@ -27,7 +27,7 @@ export default function ApiaryList() {
                     <tbody>
                         {apiaries.map(apiary =>
                             <ApiaryListItem
-                                key={apiary._id}
+                                key={apiary.id}
                                 apiary={apiary}
                             />
                         )}
