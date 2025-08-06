@@ -30,8 +30,8 @@ export default function HiveAdd() {
     const submitHiveHandler = async (values) => {
         try {
             setIsAdding(true);
-            const hive = await addHiveHandler(values);
-            navigate(`/hives/${hive._id}/details`);
+            const hiveId = await addHiveHandler(values);
+            navigate(`/hives/${hiveId}/details`);
         } catch (error) {
             toast.error(error.message);
         } finally {

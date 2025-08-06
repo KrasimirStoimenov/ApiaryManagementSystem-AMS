@@ -4,7 +4,7 @@ const BASE_URL = `${import.meta.env.VITE_API_URL}`;
 const BASE_HIVES_URL = `${BASE_URL}/api/hives`;
 
 const getAll = () =>  requester.get(`${BASE_HIVES_URL}`);
-const getById = (hiveId) => requester.get(`${BASE_URL}/${hiveId}`);
+const getById = (hiveId) => requester.get(`${BASE_HIVES_URL}/${hiveId}`);
 
 const getHiveWithApiaryById = (hiveId) => {
     const params = new URLSearchParams({
