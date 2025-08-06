@@ -104,7 +104,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -173,7 +178,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Apiaries/{id}": {
@@ -255,7 +265,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -336,7 +351,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -405,7 +425,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/Apiaries/{apiaryId}/hives": {
@@ -490,7 +515,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/api/BeeQueens": {
