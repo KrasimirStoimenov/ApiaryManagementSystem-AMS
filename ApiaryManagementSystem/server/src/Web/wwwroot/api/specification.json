@@ -1981,7 +1981,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HiveModel"
+                  "$ref": "#/components/schemas/HiveWithEnrichedDetailsModel"
                 }
               }
             }
@@ -3500,6 +3500,51 @@
           },
           "hasNextPage": {
             "type": "boolean"
+          }
+        }
+      },
+      "HiveWithEnrichedDetailsModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "number": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBought": {
+            "type": "string",
+            "format": "date"
+          },
+          "apiaryName": {
+            "type": "string"
+          },
+          "apiaryLocation": {
+            "type": "string"
+          },
+          "inspectionsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "harvestsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "diseasesCount": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

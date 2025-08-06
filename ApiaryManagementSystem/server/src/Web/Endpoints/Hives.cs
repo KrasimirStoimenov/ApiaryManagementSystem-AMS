@@ -6,6 +6,7 @@ using ApiaryManagementSystem.Application.Features.Hives.Commands.DeleteHive;
 using ApiaryManagementSystem.Application.Features.Hives.Commands.UpdateHive;
 using ApiaryManagementSystem.Application.Features.Hives.Queries;
 using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHiveById;
+using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHiveById.Models;
 using ApiaryManagementSystem.Application.Features.Hives.Queries.GetHives;
 using ApiaryManagementSystem.Web.Infrastructure;
 using MediatR;
@@ -31,7 +32,7 @@ public class Hives : EndpointGroupBase
             PageSize = pageSize
         });
 
-    public async Task<HiveModel> GetHiveById(ISender sender, Guid id)
+    public async Task<HiveWithEnrichedDetailsModel> GetHiveById(ISender sender, Guid id)
         => await sender.Send(new GetHiveByIdQuery() { HiveId = id });
 
     public async Task<IResult> CreateHive(ISender sender, CreateHiveCommand command)
