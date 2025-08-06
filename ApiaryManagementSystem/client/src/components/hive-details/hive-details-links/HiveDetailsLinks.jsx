@@ -7,11 +7,11 @@ import { ListGroup } from "react-bootstrap";
 
 export default function HiveDetailsLinks({
     hiveId,
-    hiveBeeQueensCount
+    hiveBeeQueensCount,
+    hiveInspectionsCount,
+    hiveDiseasesCount,
+    hiveHarvestsCount
 }) {
-    const { hiveInspectionsCount } = useGetInspectionsCountByHiveId(hiveId);
-    const { hiveHarvestsCount } = useGetHarvestsCountByHiveId(hiveId);
-
     return (
         <ListGroup className="my-4">
             <ListGroup.Item>
@@ -19,6 +19,9 @@ export default function HiveDetailsLinks({
             </ListGroup.Item>
             <ListGroup.Item>
                 <Link to={`/hives/${hiveId}/inspections`}><strong>Inspections:</strong> {hiveInspectionsCount}</Link>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Link to={`/hives/${hiveId}/diseases`}><strong>Diseases:</strong> {hiveDiseasesCount}</Link>
             </ListGroup.Item>
             <ListGroup.Item>
                 <Link to={`/hives/${hiveId}/harvests`}><strong>Harvests:</strong> {hiveHarvestsCount}</Link>

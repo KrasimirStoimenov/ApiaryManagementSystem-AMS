@@ -11,7 +11,7 @@ export function HiveContextProvider() {
     };
 
     const contextData = {
-        hiveId: hiveState._id,
+        hiveId: hiveState.id,
         hiveNumber: hiveState.number,
         hiveColor: hiveState.color,
         changeHiveState: changeHiveState

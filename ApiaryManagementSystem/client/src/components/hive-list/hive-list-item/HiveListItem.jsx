@@ -11,7 +11,7 @@ export default function HiveListItem({
             <td>{hive.status}</td>
             <td>{hive.color}</td>
             <td>{hive.dateBought}</td>
-            {/* <td>{`${hive.apiary.name} - ${hive.apiary.location}`}</td> */}
+            <td>{hive.apiaryId}</td>
         </tr>
     );
 };

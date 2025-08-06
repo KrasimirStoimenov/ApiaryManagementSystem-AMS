@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { useDeleteHive, useGetHiveWithApiaryById } from '../../hooks/useHives';
+import { useDeleteHive, useGetHiveById } from '../../hooks/useHives';
 import { useGetBeeQueensByHiveId } from '../../hooks/useBeeQueens';
 
 import { Container, Row, Col, Card, Button, Image } from 'react-bootstrap';
@@ -11,14 +11,14 @@ import HiveDetailsLinks from './hive-details-links/HiveDetailsLinks';
 import Loading from '../loading/Loading';
 import Delete from '../delete/Delete';
 
-import { formatIsoStringToDisplayDate } from '../../utils/dateUtils';
+import { useGetApiaryById } from '../../hooks/useApiaries';
 
 export default function HiveDetails() {
     const { hiveId } = useParams();
     const navigate = useNavigate();
-    const { hiveWithApiary, isFetching } = useGetHiveWithApiaryById(hiveId);
-    const { hiveBeeQueens } = useGetBeeQueensByHiveId(hiveId);
-    const hiveAliveBeeQueen = hiveBeeQueens.filter(x => x.isAlive);
+    const {hive, isFetching} = useGetHiveById(hiveId);
+    // const { hiveBeeQueens } = useGetBeeQueensByHiveId(hiveId);
+    // const hiveAliveBeeQueen = hiveBeeQueens.filter(x => x.isAlive);
 
     const deleteHiveHandler = useDeleteHive();
     const [showDeleteById, setShowDeleteById] = useState(null);
@@ -61,35 +61,38 @@ export default function HiveDetails() {
                             </Col>
                             <Col md={7} lg={7}>
                                 <Card.Body >
-                                    <Card.Title>Hive №{hiveWithApiary.number}</Card.Title>
+                                    <Card.Title>Hive №{hive.number}</Card.Title>
                                     <Card.Text>
-                                        <strong>Location:</strong> {hiveWithApiary.apiary.name} - {hiveWithApiary.apiary.location}
+                                        <strong>Location:</strong> {hive.apiaryName} - {hive.apiaryLocation}
                                     </Card.Text>
                                     <Card.Text>
-                                        <strong>Type:</strong> {hiveWithApiary.type}
+                                        <strong>Type:</strong> {hive.type}
                                     </Card.Text>
                                     <Card.Text>
-                                        <strong>Status:</strong> {hiveWithApiary.status}
+                                        <strong>Status:</strong> {hive.status}
                                     </Card.Text>
                                     <Card.Text>
-                                        <strong>Color:</strong> {hiveWithApiary.color}
+                                        <strong>Color:</strong> {hive.color}
                                     </Card.Text>
                                     <Card.Text>
-                                        <strong>Date bought:</strong> {formatIsoStringToDisplayDate(hiveWithApiary.dateBought)}
+                                        <strong>Date bought:</strong> {hive.dateBought}
                                     </Card.Text>
-                                    <Card.Text>
+                                    {/* <Card.Text>
                                         <strong>Queen Status: </strong>
                                         {(hiveAliveBeeQueen.length > 0)
                                             ? <strong className="text-success">{`Has alive bee queen from ${hiveAliveBeeQueen[0].year} year with mark: ${hiveAliveBeeQueen[0].colorMark}`}</strong>
                                             : <strong className="text-danger">Hive is queenless. There is no live bee queen for the hive.</strong>
                                         }
-                                    </Card.Text>
+                                    </Card.Text> */}
                                     <HiveDetailsLinks
                                         hiveId={hiveId}
-                                        hiveBeeQueensCount={hiveBeeQueens.length}
+                                        hiveBeeQueensCount={1}
+                                        hiveInspectionsCount={hive.inspectionsCount}
+                                        hiveHarvestsCount={hive.harvestsCount}
+                                        hiveDiseasesCount={hive.diseasesCount}
                                     />
                                     <Button as={Link} to={`/hives/${hiveId}/edit`} variant="warning" className="me-2"><i className="bi bi-pencil-square"></i> Edit</Button>
-                                    <Button variant="danger" onClick={() => deleteClickHandler(hiveWithApiary._id)}><i className="bi bi-trash-fill"></i> Delete</Button>
+                                    <Button variant="danger" onClick={() => deleteClickHandler(hive.id)}><i className="bi bi-trash-fill"></i> Delete</Button>
                                 </Card.Body>
                             </Col>
                         </Row>
