@@ -10,7 +10,12 @@ public static class IEndpointRouteBuilderExtensions
         Guard.Against.AnonymousMethod(handler);
 
         builder.MapGet(pattern, handler)
-            .WithName(handler.Method.Name);
+            .WithName(handler.Method.Name)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status401Unauthorized)
+            .ProducesProblem(StatusCodes.Status403Forbidden)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .ProducesProblem(StatusCodes.Status500InternalServerError);
 
         return builder;
     }
@@ -21,7 +26,11 @@ public static class IEndpointRouteBuilderExtensions
 
         builder.MapPost(pattern, handler)
             .WithName(handler.Method.Name)
-            .Produces(StatusCodes.Status201Created);
+            .Produces(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status401Unauthorized)
+            .ProducesProblem(StatusCodes.Status403Forbidden)
+            .ProducesProblem(StatusCodes.Status500InternalServerError);
 
         return builder;
     }
@@ -33,7 +42,10 @@ public static class IEndpointRouteBuilderExtensions
         builder.MapPut(pattern, handler)
             .WithName(handler.Method.Name)
             .Produces(StatusCodes.Status204NoContent)
-            .ProducesProblem(StatusCodes.Status400BadRequest);
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status401Unauthorized)
+            .ProducesProblem(StatusCodes.Status403Forbidden)
+            .ProducesProblem(StatusCodes.Status500InternalServerError);
 
         return builder;
     }
@@ -44,7 +56,11 @@ public static class IEndpointRouteBuilderExtensions
 
         builder.MapDelete(pattern, handler)
             .WithName(handler.Method.Name)
-            .Produces(StatusCodes.Status204NoContent);
+            .Produces(StatusCodes.Status204NoContent)
+            .ProducesProblem(StatusCodes.Status401Unauthorized)
+            .ProducesProblem(StatusCodes.Status403Forbidden)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .ProducesProblem(StatusCodes.Status500InternalServerError);
 
         return builder;
     }

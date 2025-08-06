@@ -50,7 +50,11 @@ app.UseHealthChecks("/health")
         settings.DocumentPath = "/api/specification.json";
     });
 
-app.UseExceptionHandler(options => { });
+app.UseExceptionHandler(new ExceptionHandlerOptions
+{
+    AllowStatusCode404Response = true,
+});
+
 app.UseCors("AllowReactApp");
 
 app.Map("/", () => Results.Redirect("/api"));

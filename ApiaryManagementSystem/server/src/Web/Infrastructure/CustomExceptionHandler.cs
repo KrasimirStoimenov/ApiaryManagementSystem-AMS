@@ -12,12 +12,12 @@ public class CustomExceptionHandler : IExceptionHandler
     public CustomExceptionHandler()
     {
         // Register known exception types and handlers.
-        _exceptionHandlers = new()
+        this._exceptionHandlers = new()
             {
-                { typeof(ValidationException), HandleValidationException },
-                { typeof(NotFoundException), HandleNotFoundException },
-                { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
-                { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
+                { typeof(ValidationException), this.HandleValidationException },
+                { typeof(NotFoundException), this.HandleNotFoundException },
+                { typeof(UnauthorizedAccessException), this.HandleUnauthorizedAccessException },
+                { typeof(ForbiddenAccessException), this.HandleForbiddenAccessException },
             };
     }
 
@@ -25,7 +25,7 @@ public class CustomExceptionHandler : IExceptionHandler
     {
         var exceptionType = exception.GetType();
 
-        if (_exceptionHandlers.TryGetValue(exceptionType, out Func<HttpContext, Exception, Task>? value))
+        if (this._exceptionHandlers.TryGetValue(exceptionType, out Func<HttpContext, Exception, Task>? value))
         {
             await value.Invoke(httpContext, exception);
             return true;

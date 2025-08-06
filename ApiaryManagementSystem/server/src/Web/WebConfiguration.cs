@@ -23,6 +23,7 @@ public static class WebConfiguration
             .AddDbContextCheck<ApplicationDbContext>();
 
         services.AddExceptionHandler<CustomExceptionHandler>();
+        services.AddProblemDetails();
 
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>

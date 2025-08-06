@@ -17,7 +17,7 @@ public class Apiaries : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            //.RequireAuthorization()
+            .RequireAuthorization()
             .MapGet(this.GetApiaries)
             .MapGet(this.GetApiaryById, "{id}")
             .MapGet(this.GetHivesByApiaryId, "{apiaryId}/hives")
